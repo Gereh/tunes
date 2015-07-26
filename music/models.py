@@ -1,13 +1,17 @@
 from django.db import models
 
-#test
+
 class Artist(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
     bio = models.TextField()
     profileImg = models.ImageField(upload_to="media/artist/profileImg", default="media/artist/profileImg/default.jpg")
     coverImg = models.ImageField(upload_to="media/artist/coverImg", default="media/artist/coverImg/default.jpg")
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.name
 
 class Album(models.Model):
     name = models.CharField(max_length=30)
@@ -15,6 +19,11 @@ class Album(models.Model):
     description = models.TextField()
     price = models.IntegerField()
     licenseNo = models.CharField(max_length=50)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.name + "by" + str(self.artistID)
 
 
 class Track(models.Model):
@@ -26,6 +35,11 @@ class Track(models.Model):
     lyric = models.TextField(blank=True)
     poet = models.TextField(blank=True)
     price = models.IntegerField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.name + "by" + str(self.artistID)
 
 
 class User(models.Model):
@@ -38,12 +52,20 @@ class User(models.Model):
     isGold = models.BooleanField(default=False)
     isActive = models.BooleanField(default=False)
     lastLogin = models.DateTimeField(blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.userName
 
 class Playlist(models.Model):
     userID = models.ForeignKey(User)
     trackID = models.ForeignKey(Track)
     albumID = models.ForeignKey(Album)
+    createdAt = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return "Playlist"
 
     class Meta:
         unique_together = (("userID", "trackID"),)
