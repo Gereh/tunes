@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
 
 
 class Artist(models.Model):
@@ -28,7 +29,7 @@ class Album(models.Model):
 
 class Track(models.Model):
     name = models.CharField(max_length=30)
-    artistID = models.ManyToManyField(Artist)
+    artistID = models.ForeignKey(Artist)
     albumID = models.ForeignKey(Album)
     link = models.FileField(upload_to="")
     rate = models.IntegerField(default=0, choices=((0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),))
@@ -42,8 +43,7 @@ class Track(models.Model):
         return self.name + "by" + str(self.artistID)
 
 
-class User(models.Model):
-    userName = models.CharField(max_length=30, unique=True, primary_key=True)
+class User(AbstractBaseUser):
     name = models.CharField(max_length=30, blank=True)
     email = models.EmailField()
     phone = models.CharField(max_length=10, blank=True)
@@ -54,9 +54,13 @@ class User(models.Model):
     lastLogin = models.DateTimeField(blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
+    USERNAME_FIELD = 'userName'
+    REQUIRED_FIELDS = ["userName","email"]
 
     def __unicode__(self):
         return self.userName
+
+
 
 class Playlist(models.Model):
     userID = models.ForeignKey(User)
