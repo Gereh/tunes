@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
+
 
 
 class Artist(models.Model):
@@ -12,7 +14,8 @@ class Artist(models.Model):
     updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name
+
 
 class Album(models.Model):
     name = models.CharField(max_length=30)
@@ -24,7 +27,7 @@ class Album(models.Model):
     updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return self.name + "by" + str(self.artistID)
+        return u'%s by %s' % (self.name, str(self.artistID))
 
 
 class Track(models.Model):
@@ -40,10 +43,11 @@ class Track(models.Model):
     updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return self.name + "by" + str(self.artistID)
+        return u'%s by %s' % (self.name, str(self.artistID))
 
 
 class User(AbstractBaseUser):
+    userName = models.CharField(max_length=30, unique=Track, primary_key=True)
     name = models.CharField(max_length=30, blank=True)
     email = models.EmailField()
     phone = models.CharField(max_length=10, blank=True)
@@ -55,11 +59,16 @@ class User(AbstractBaseUser):
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
     USERNAME_FIELD = 'userName'
-    REQUIRED_FIELDS = ["userName","email"]
+    REQUIRED_FIELDS = ["userName", "email"]
 
     def __unicode__(self):
-        return self.userName
+        return u'%s' % self.userName
 
+    def get_full_name(self):
+        return self.name
+
+    def get_short_name(self):
+        return self.userName
 
 
 class Playlist(models.Model):
@@ -81,7 +90,33 @@ class Event:
 
 
     def __unicode__(self):
-        return "Playlist"
+        return u'{%s} bought {%s} from {%s} album' % (str(self.trackID), str(self.trackID), self(self.albumID))
 
     class Meta:
         unique_together = (("userID", "trackID"),)
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=50)
+    artistID = models.ForeignKey(Artist)
+    content = models.TextField()
+    likeCount = models.IntegerField(default=0)
+    isPublic = models.BooleanField(default=True)
+    isGeneral = models.BooleanField(default=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "post : %s" % self.title
+
+
+class Comment(models.Model):
+    postID = models.ForeignKey(Post)
+    userID = models.ForeignKey(User)
+    message = models.TextField()
+    isConfirmed = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "comment by %s" % str(self.userID)
