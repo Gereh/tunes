@@ -77,6 +77,13 @@ class Playlist(models.Model):
     albumID = models.ForeignKey(Album)
     createdAt = models.DateTimeField(auto_now_add=True)
 
+    def __unicode__(self):
+        return u'{%s} bought {%s} from {%s} album' % (str(self.trackID), str(self.trackID), self(self.albumID))
+
+    class Meta:
+        unique_together = (("userID", "trackID"),)
+
+
 class Event:
     title=models.CharField(max_length=50)
     artistID=models.ForeignKey(Artist)
@@ -87,14 +94,6 @@ class Event:
     data=models.DateField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
-
-
-    def __unicode__(self):
-        return u'{%s} bought {%s} from {%s} album' % (str(self.trackID), str(self.trackID), self(self.albumID))
-
-    class Meta:
-        unique_together = (("userID", "trackID"),)
-
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
