@@ -68,6 +68,18 @@ class Playlist(models.Model):
     albumID = models.ForeignKey(Album)
     createdAt = models.DateTimeField(auto_now_add=True)
 
+class Event:
+    title=models.CharField(max_length=50)
+    artistID=models.ForeignKey(Artist)
+    description=models.TextField()
+    location=models.TextField()
+    pointLat=models.IntegerField()
+    PointLon=models.IntegerField()
+    data=models.DateField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
+
+
     def __unicode__(self):
         return "Playlist"
 
