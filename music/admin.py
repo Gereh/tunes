@@ -15,10 +15,12 @@ class TrackInline(admin.StackedInline):
 class ArtistAdmin(admin.ModelAdmin):
     inlines = [AlbumInline, TrackInline]
 
-
+class AlbumAdmin(admin.ModelAdmin):
+    inlines = [TrackInline]
 
 
 
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Playlist)
 admin.site.register(User)
+admin.site.register(Album,AlbumAdmin)
