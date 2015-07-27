@@ -19,12 +19,14 @@ class Artist(models.Model):
 
 class Album(models.Model):
     name = models.CharField(max_length=30)
-    artistID = models.ForeignKey(Artist)
+    artistID = models.ManyToManyField(Artist)
     description = models.TextField()
     price = models.IntegerField()
     licenseNo = models.CharField(max_length=50)
+    publishDate = models.DateTimeField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return u'%s by %s' % (self.name, str(self.artistID))
@@ -32,9 +34,10 @@ class Album(models.Model):
 
 class Track(models.Model):
     name = models.CharField(max_length=30)
-    artistID = models.ForeignKey(Artist)
+    artistID = models.ManyToManyField(Artist)
     albumID = models.ForeignKey(Album)
     link = models.FileField(upload_to="")
+    rateCount = models.IntegerField()
     rate = models.IntegerField(default=0, choices=((0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),))
     lyric = models.TextField(blank=True)
     poet = models.TextField(blank=True)
@@ -106,7 +109,7 @@ class Post(models.Model):
     updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return "post : %s" % self.title
+        return r'post : %s' % self.title
 
 
 class Comment(models.Model):
@@ -118,4 +121,39 @@ class Comment(models.Model):
     updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return "comment by %s" % str(self.userID)
+        return r'comment by %s' % str(self.userID)
+
+
+class BankTransaction(models.Model):
+    userID = models.ForeignKey(User)
+    date = models.DateTimeField()
+    amount = models.IntegerField()
+    bank = models.CharField(max_length=20)
+    receiptNo = models.CharField(max_length=30)
+    createdAt = models.DateTimeField(auto_now_add=True)
+
+
+class SiteTransaction(models.Model):
+    userID = models.ForeignKey(User)
+    date = models.DateTimeField()
+    amount = models.IntegerField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+
+
+class Admin(AbstractBaseUser):
+    userName = models.CharField(primary_key=True,unique=True,max_length=50)
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    balance = models.IntegerField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
+    USERNAME_FIELD = 'userName'
+    REQUIRED_FIELDS = ["userName", "email"]
+
+
+class AlbumOwner(models.Model):
+    albumID = models.ForeignKey(Album)
+    adminID = models.ForeignKey(Admin)
+    percent = models.IntegerField()                                         #needed a restriction in data
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
