@@ -82,3 +82,25 @@ class Playlist(models.Model):
 
     class Meta:
         unique_together = (("userID", "trackID"),)
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=50)
+    artistID = models.ForeignKey(Artist)
+    content = models.TextField()
+    likeCount = models.IntegerField(default=0)
+    isPublic = models.BooleanField(default=True)
+    isGeneral = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return "post : %s" % self.title
+
+
+class Comment(models.Model):
+    postID = models.ForeignKey(Post)
+    userID = models.ForeignKey(User)
+    message = models.TextField()
+    isConfirmed = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return "comment by %s" % str(self.userID)
