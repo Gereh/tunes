@@ -91,6 +91,8 @@ class Post(models.Model):
     likeCount = models.IntegerField(default=0)
     isPublic = models.BooleanField(default=True)
     isGeneral = models.BooleanField(default=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return "post : %s" % self.title
@@ -101,6 +103,8 @@ class Comment(models.Model):
     userID = models.ForeignKey(User)
     message = models.TextField()
     isConfirmed = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return "comment by %s" % str(self.userID)
