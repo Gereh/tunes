@@ -27,7 +27,6 @@ class Album(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
 
-
     def __unicode__(self):
         return u'%s by %s' % (self.name, str(self.artistID))
 

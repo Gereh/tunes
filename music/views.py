@@ -1,5 +1,6 @@
 from django.shortcuts import render
+from .models import *
 
-# Create your views here.
-from django.shortcuts import render
-    return render(request, 'home.html')
+def home(request):
+    slider = Album.objects.all().order_by('publishDate')[:5]
+    return render(request, 'home.html', {'slider': slider})
