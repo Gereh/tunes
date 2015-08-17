@@ -719,96 +719,46 @@
 						<div class="box-body">
 							<div class="carousel slide media-carousel" id="media">
 						        <div class="carousel-inner">
-						          <div class="item  active">
-						            <div class="row">
-						              <div class="col-md-3">
-						                <div class="thumbnail">
-							                <div class="caption">
-							                	<br>
-							                    <h4>من خود آن سیزدهم</h4>
-							                    <p>محسن چاوشی</p>
-							                    <br>
-							                    <ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
-												</ul>
-							                </div>
-							                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
-							            </div>
-						              </div>
-                                      <div class="col-md-3">
-						                <div class="thumbnail">
-							                <div class="caption">
-							                	<br>
-							                    <h4>من خود آن سیزدهم</h4>
-							                    <p>محسن چاوشی</p>
-							                    <br>
-							                    <ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
-												</ul>
-							                </div>
-							                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
-							            </div>
-						              </div>
-                                      <div class="col-md-3">
-						                <div class="thumbnail">
-							                <div class="caption">
-							                	<br>
-							                    <h4>من خود آن سیزدهم</h4>
-							                    <p>محسن چاوشی</p>
-							                    <br>
-							                    <ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
-												</ul>
-							                </div>
-							                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
-							            </div>
-						              </div>
-                                      <div class="col-md-3">
-						                <div class="thumbnail">
-							                <div class="caption">
-							                	<br>
-							                    <h4>من خود آن سیزدهم</h4>
-							                    <p>محسن چاوشی</p>
-							                    <br>
-							                    <ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
-												</ul>
-							                </div>
-							                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
-							            </div>
-						              </div>
-						            </div>
-						          </div>
-						          <div class="item">
-						            <div class="row">
-						              <div class="col-md-3">
-						                <div class="thumbnail">
-							                <div class="caption">
-							                	<br>
-							                    <h4>من خود آن سیزدهم</h4>
-							                    <p>محسن چاوشی</p>
-							                    <br>
-							                    <ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
-												</ul>
-							                </div>
-							                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
-							            </div>
-						              </div>          
+						            {% for myAlbum in albums %}
+                                        {% ifequal forloop.first True %}
+                                            <div class="item  active">
+                                                <div class="row">
 
+                                        {% else %}
+                                            {% ifequal forloop.counter0|divisibleby:"4" True %}
+                                                </div>
+                                                </div>
+                                                <div class="item">
+						                        <div class="row">
+                                            {% endifequal %}
+                                        {% endifequal %}
 
-						            </div>
-						          </div>
+                                        <div class="col-md-3">
+                                            <div class="thumbnail">
+                                                <div class="caption">
+                                                    <br>
+                                                    <h4>{{ myAlbum.name }}</h4>
+                                                    <p>
+                                                        {% for artist in myAlbum.artistID.all %}
+                                                            {{ artist.name }}&nbsp;
+                                                        {% endfor %}
+                                                    </p>
+                                                    <br>
+                                                    <ul class="ZDmneu">
+                                                        <li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
+                                                        <li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
+                                                        <li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
+                                                    </ul>
+                                                </div>
+                                                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
+                                            </div>
+                                        </div>
+
+                                        {% ifequal forloop.revcounter0 0 %}
+                                            </div>
+                                            </div>
+                                        {% endifequal %}
+                                    {% endfor %}
 						        </div>
 						        <a data-slide="prev" href="#media" class="left carousel-control"><img src="{% static 'music/img/sliderPrev.png' %}" alt=""></a>
 						        <a data-slide="next" href="#media" class="right carousel-control"><img src="{% static 'music/img/sliderNext.png' %}" alt=""></a>
@@ -835,69 +785,46 @@
 						<div class="box-body">
 							<div class="carousel slide media-carousel" id="media1">
 						        <div class="carousel-inner">
-						          <div class="item  active">
-						            <div class="row">
-						              <div class="col-md-3">
-						                <div class="thumbnail">
-							                <div class="caption">
-							                	<br>
-							                    <h4>من خود آن سیزدهم</h4>
-							                    <p>محسن چاوشی</p>
-							                    <br>
-							                    <ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
-												</ul>
-							                </div>
-							                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
-							            </div>
-						              </div>          
+						          {% for myAlbum in albums2 %}
+                                        {% ifequal forloop.first True %}
+                                            <div class="item  active">
+                                                <div class="row">
 
-						            </div>
-						          </div>
-						          <div class="item">
-						            <div class="row">
-						              <div class="col-md-3">
-						                <div class="thumbnail">
-							                <div class="caption">
-							                	<br>
-							                    <h4>من خود آن سیزدهم</h4>
-							                    <p>محسن چاوشی</p>
-							                    <br>
-							                    <ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
-												</ul>
-							                </div>
-							                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
-							            </div>
-						              </div>          
+                                        {% else %}
+                                            {% ifequal forloop.counter0|divisibleby:"4" True %}
+                                                </div>
+                                                </div>
+                                                <div class="item">
+						                        <div class="row">
+                                            {% endifequal %}
+                                        {% endifequal %}
 
-						            </div>
-						          </div>
-						          <div class="item">
-						            <div class="row">
-						              <div class="col-md-3">
-						                <div class="thumbnail">
-							                <div class="caption">
-							                	<br>
-							                    <h4>من خود آن سیزدهم</h4>
-							                    <p>محسن چاوشی</p>
-							                    <br>
-							                    <ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
-												</ul>
-							                </div>
-							                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
-							            </div>
-						              </div>          
+                                        <div class="col-md-3">
+                                            <div class="thumbnail">
+                                                <div class="caption">
+                                                    <br>
+                                                    <h4>{{ myAlbum.name }}</h4>
+                                                    <p>
+                                                        {% for artist in myAlbum.artistID.all %}
+                                                            {{ artist.name }}&nbsp;
+                                                        {% endfor %}
+                                                    </p>
+                                                    <br>
+                                                    <ul class="ZDmneu">
+                                                        <li><a href=""><img src="{% static 'music/img/add.png' %}" alt=""></a></li>
+                                                        <li><a href=""><img src="{% static 'music/img/playSmall.png' %}" alt=""></a></li>
+                                                        <li><a href=""><img src="{% static 'music/img/downloadWhite.png' %}" alt=""></a></li>
+                                                    </ul>
+                                                </div>
+                                                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png' %}">
+                                            </div>
+                                        </div>
 
-						            </div>
-						          </div>
+                                        {% ifequal forloop.revcounter0 0 %}
+                                            </div>
+                                            </div>
+                                        {% endifequal %}
+                                    {% endfor %}
 						        </div>
 						        <a data-slide="prev" href="#media1" class="left carousel-control"><img src="{% static 'music/img/sliderPrev.png' %}" alt=""></a>
 						        <a data-slide="next" href="#media1" class="right carousel-control"><img src="{% static 'music/img/sliderNext.png' %}" alt=""></a>
