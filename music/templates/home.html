@@ -413,7 +413,7 @@
 						<p>
 							<strong>جست و جو</strong> (نام هنرمند، نام آلبوم ، نام قطعه)
 						</p>
-						<form action="">
+						<form action="search" method="get">
 							<div class="form-group">
 							    <input type="text" class="form-control" id="search" placeholder="">
 							</div>
@@ -459,15 +459,19 @@
 					</div>
 					
 					<div class="col-md-12 col-sm-12 col-xs-12 text-center arrow">
-						<img src="{% static 'music/img/bottom.png' %}" alt="">
+                        <a href="#advertises">
+						    <img src="{% static 'music/img/bottom.png' %}" alt="">
+                        </a>
 					</div>
-					<div class="col-md-12 col-sm-12 col-xs-12 cover">
-						<img class="img-responsive" src="{% static 'music/img/cover.png' %}" alt="">
-					</div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 cover" id="advertises">
+                    {% for adv in advertises %}
+                        <img class="img-responsive" src="{{ adv.img.url }}" alt="">
+                    {% endfor %}
+                    </div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="title">
 							<p class="pull-right">
-								<span class="fa fa-bars"></span>پرفروش ترین ها
+								<span class="fa fa-bars"></span>محبوب ترین ها
 							</p>
 
 							<div class="clear"></div>
