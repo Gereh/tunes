@@ -24,44 +24,37 @@
 	<script type="text/javascript" src="{% static 'music/js/jquery.jplayer.js' %}"></script>
 	<script type="text/javascript" src="{% static 'music/js/jplayer.playlist.js' %}"></script>
 	<script type="text/javascript">
-	// 	$(document).ready(function() {
-	// 	  $('#media').carousel({
-	// 	    pause: true,
-	// 	    interval: false,
-	// 	  });
-	// 	});
-	// </script>
-	<script type="text/javascript">
 		$(document).ready(function(){
-			
-			$(".jp-playlistbtn").click(function(){
-			    $(".displayplaylist").slideToggle();
-			});
-			var play=0;
-			$(".jp-play").click(function(){
-			if(play==0){
-			$(".jp-play").css({"background":"url('{% static 'music/img/pause.png' %}')"});
-			play=1;
-			}
-			else
-			{
-				$(".jp-play").css({"background":"url('{% static 'music/img/play.png' %}')"});
-			play=0;
-			}
+
+            $(".jp-playlistbtn").click(function(){
+                $(".displayplaylist").slideToggle();
 			});
 
+			var play=0;
+			$(".jp-play").click(function(){
+                if(play==0){
+                    $(".jp-play").css({"background":"url('{% static 'music/img/pause.png' %}')"});
+                    play=1;
+                }
+                else
+                {
+                    $(".jp-play").css({"background":"url('{% static 'music/img/play.png' %}')"});
+                    play=0;
+                }
+			});
 
 			var mute=0;
 			$(".jp-mute").click(function(){
-			if(mute==0){
-			$(".jp-mute").css({"background":"url('{% static 'music/img/mute.png' %}')"});
-			mute=1;
-			}
-			else
-			{
-				$(".jp-mute").css({"background":"url('{% static 'music/img/volume.png' %}')"});
-			mute=0;
-			}
+			    if(mute==0)
+                {
+			        $(".jp-mute").css({"background":"url('{% static 'music/img/mute.png' %}')"});
+			        mute=1;
+    			}
+	    		else
+		    	{
+			    	$(".jp-mute").css({"background":"url('{% static 'music/img/volume.png' %}')"});
+			        mute=0;
+			    }
 			});
 
 			var myPlaylistWidth=0;
@@ -83,8 +76,7 @@
 					title:"مینا",
 					artist:"محسن چاوشی",
 					mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
-					oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg",
-					poster: "http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png"
+					poster: "/media/music/album/thumbImg/default.jpg",
 				}
 			], {
 				playlistOptions: {
@@ -108,7 +100,7 @@
 					artist:"{% for artist in album.artistID.all %}{{ artist.name }}{% endfor %}",
 					free:false,
 					mp3:"{{ album.mainTrack.link.url }}",
-					poster: "{{ album.thmbImg }}"
+					poster: "{{ album.thumbImg.url }}"
 				});
                 myPlaylist.next();
                 myPlaylist.pause();
@@ -124,7 +116,7 @@
 					artist:"{% for artist in album.artistID.all %}{{ artist.name }}{% endfor %}",
 					free:false,
 					mp3:"{{ album.mainTrack.link.url }}",
-					poster: "{{ album.thmbImg }}"
+					poster: "{{ album.mainTrack.playerImg }}"
 				});
                 myPlaylist.next();
 			    });
@@ -300,37 +292,6 @@
 				myPlaylist.option("shuffleTime", 2000);
 			});
 
-			// Equivalent commands
-
-			$("#playlist-equivalent-1-a").click(function() {
-				myPlaylist.add({
-					title:"Your Face",
-					artist:"The Stark Palace",
-					mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
-					oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg",
-					poster: "http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png"
-				}, true);
-			});
-
-			$("#playlist-equivalent-1-b").click(function() {
-				myPlaylist.add({
-					title:"Your Face",
-					artist:"The Stark Palace",
-					mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
-					oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg",
-					poster: "http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png"
-				});
-				myPlaylist.play(-1);
-			});
-
-			// AVOID COMMANDS
-
-			$("#playlist-avoid-1").click(function() {
-				myPlaylist.remove(2); // Removes the 3rd item
-				myPlaylist.remove(3); // Ignored unless removeTime=0: Where it removes the 4th item, which was originally the 5th item.
-			});
-
-
 		});
 		//]]>
 	</script>
@@ -353,9 +314,7 @@
 						<div class="jp-type-playlist">
 						<!-- <div id="jquery_jplayer_N" class="jp-jplayer"></div> -->
 							<div class="jp-gui">
-								<div class="jp-video-play">
-									<button class="jp-video-play-icon" role="button" tabindex="0">play</button>
-								</div>
+
 								<div class="jp-interface">
 									<div class="col-md-6 col-md-push-6 col-sm-6 col-sm-push-6 col-xs-12 no-padding">
 										<div class="media">
@@ -363,19 +322,9 @@
 										    	<div id="jquery_jplayer_N" class="jp-jplayer"></div>
 										  	</div>
 										  	<div class="media-body detail">
-										    	<p><strong>مینا</strong></p>
-										    	<marquee onmouseenter="this.stop();" onmouseleave="this.start();" direction="right">
-                                                    <script>
-                                                    </script>
-										    		<ul>
-											    		<li>محسن</li>
-											    		<li>|</li>
-											    		<li>پاپ</li>
-											    		<li>|</li>
-											    		<li>تک آهنگ</li>
-											    	</ul>
-										    	</marquee>
-										    	
+										    	<p><strong class="jp-title"></strong></p>
+                                                <br>
+                                                <p><span class="jp-duration"></span> - <span class="jp-current-time"></span></p>
 										  	</div>
 										</div>
 									</div>

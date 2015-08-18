@@ -248,7 +248,8 @@
 		_createListItem: function(media) {
 			var self = this;
 			// Wrap the <li> contents in a <div>
-			var listItem = "<li><div id='jquery_jplayer_N' class='jp-jplayer' style='width: 50px; height: 50px;'><img id='jp_poster_0' src='http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png' style='width: 50px; height: 50px; display: inline;'><audio id='jp_audio_0' preload='metadata' src='http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg' title='مینا'></audio><video id='jp_video_0' preload='metadata' title='مینا' style='width: 0px; height: 0px;'></video></div><div class='myPlaylist'>";
+			// var listItem = "<li><div id='jquery_jplayer_N' class='jp-jplayer' style='width: 50px; height: 50px;'><img id='jp_poster_0' src='http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png' style='width: 50px; height: 50px; display: inline;'><audio id='jp_audio_0' preload='metadata' src='http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg' title='مینا'></audio></div><div class='myPlaylist'>";
+			var listItem = "<li style='padding-bottom:5px;'><div>";
 
 			// Create remove control
 			listItem += "<a href='javascript:;' class='" + this.options.playlistOptions.removeItemClass + "'>&times;</a>";
@@ -271,7 +272,7 @@
 			}
 
 			// The title is given next in the HTML otherwise the float:right on the free media corrupts in IE6/7
-			listItem += "<a href='javascript:;' class='" + this.options.playlistOptions.itemClass + "' tabindex='0'>" + media.title + (media.artist ? " <span class='jp-artist'> <br> " + media.artist + "</span>" : "") + "</a>";
+			listItem += "<a href='javascript:;' class='" + this.options.playlistOptions.itemClass + "' tabindex='0'>" + "<img src=" + media.poster + " style='width: 50px; height:50px; display: inline;' >" + "<p style='display:inline-block; padding-right:10px;'><span>" + media.title + "</span>" + (media.artist ? " <span class='jp-artist'> <br> " + media.artist + "</span>" : "") + "</p></a>";
 			listItem += "</div></li>";
 
 			return listItem;

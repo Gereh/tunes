@@ -101,11 +101,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR,  'templates'),
 )
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    'E:/tunes/static/',
+]

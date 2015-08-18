@@ -68,6 +68,7 @@ class Track(models.Model):
     lyric = models.TextField(blank=True)
     poet = models.TextField(blank=True)
     price = models.IntegerField()
+    playerImg = models.ImageField(upload_to="music/track/playerimg",default="music/track/playerimg/default.jpg")
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
 
