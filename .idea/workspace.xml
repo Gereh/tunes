@@ -506,7 +506,13 @@
       <option name="project" value="LOCAL" />
       <updated>1439914776913</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="player and static files now works correctly!">
+      <created>1439914792027</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1439914792027</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
