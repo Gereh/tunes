@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>تونز</title>
     {% load staticfiles %}
+
 	<!--CSS-->
 	<!-- <link type="image/x-icon" rel="shortcut icon" href="img/favicon.ico">
 	<link type="image/x-icon" rel="icon" href="img/favicon.ico"> -->
@@ -25,19 +26,18 @@
 	<script type="text/javascript" src="{% static 'music/js/jplayer.playlist.js' %}"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
 			$(".jp-playlistbtn").click(function(){
 			    $(".displayplaylist").slideToggle();
 			});
 			var play=0;
 			$(".jp-play").click(function(){
 			if(play==0){
-			$(".jp-play").css({"background":"url('img/pause.png')"});
+			$(".jp-play").css({"background":"url({% static 'music/img/pause.png' %})"});
 			play=1;
 			}
 			else
 			{
-				$(".jp-play").css({"background":"url('img/play.png')"});
+				$(".jp-play").css({"background":"url({% static 'music/img/play.png' %})"});
 			play=0;
 			}
 			});
@@ -573,7 +573,7 @@
 						<div class="media">
 						  	<div class="pull-left">
 						    	<a href="#">
-						     		<img class="media-object" src="img/user.png" alt="...">
+						     		<img class="media-object" src="{% static 'music/img/user.png'  %} " alt="...">
 						    	</a>
 						  	</div>
 						</div>
@@ -647,7 +647,7 @@
 						</form>
 					</div>
 					<div class="col-md-2 col-sm-2 col-xs-12 logo my-padding">
-						<img src="img/logo.png" alt="" class="img-responsive">
+						<img src="{% static 'music/img/logo.png'%}" alt="" class="img-responsive">
 					</div>
 				</div>
 			</div>
@@ -657,7 +657,7 @@
 				<div class="container">
 					<div class="col-md-4 col-md-push-8 col-sm-4 col-sm-push-8 col-xs-12">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-							<img src="img/albumCover2.png" alt="" class="img-responsive">
+							<img src="{% static 'music/img/albumCover2.png'%}" alt="" class="img-responsive">
 						</div>
 						<div class="col-md-12 col-sm-12 col-xs-12 paddingTop no-padding">
 							<div class="title">
@@ -665,8 +665,8 @@
 									<span class="fa fa-bars"></span>کاورها
 								</p>
 								<ul class="pull-left ZDmneu">
-									<li><a href=""><img src="img/zoom.png" alt=""></a></li>
-									<li><a href=""><img src="img/download.png" alt=""></a></li>
+									<li><a href=""><img src="{% static 'music/img/zoom.png'%}" alt=""></a></li>
+									<li><a href=""><img src="{% static 'music/img/download.png'%}" alt=""></a></li>
 								</ul>
 								<div class="clear"></div>
 							</div>
@@ -676,27 +676,14 @@
 							          <div class="item  active">
 							            <div class="row">
 							              <div class="col-md-12">
-							                <a href="#"><img class="img-responsive" alt="" src="img/albumCover3.png"></a>
+							                <a href="#"><img class="img-responsive" alt="" src="{% static 'music/img/albumCover3.png'%}"></a>
 							              </div>       
 							            </div>
 							          </div>
-							          <div class="item">
-							            <div class="row">
-							              <div class="col-md-12">
-							                <a href="#"><img class="img-responsive" alt="" src="img/albumCover3.png"></a>
-							              </div>       
-							            </div>
-							          </div>
-							          <div class="item">
-							            <div class="row">
-							              <div class="col-md-12">
-							                <a href="#"><img class="img-responsive" alt="" src="img/albumCover3.png"></a>
-							              </div>     
-							            </div>
-							          </div>
+
 							        </div>
-							        <a data-slide="prev" href="#media1" class="left carousel-control"><img src="img/sliderPrev.png" alt=""></a>
-							        <a data-slide="next" href="#media1" class="right carousel-control"><img src="img/sliderNext.png" alt=""></a>
+							        <a data-slide="prev" href="#media1" class="left carousel-control"><img src="{% static 'music/img/sliderPrev.png'%}" alt=""></a>
+							        <a data-slide="next" href="#media1" class="right carousel-control"><img src="{% static 'music/img/sliderNext.png'%}" alt=""></a>
 							    </div>   
 							</div>
 						</div>
@@ -711,7 +698,7 @@
 								<div class="media">
 								  <div class="pull-left">
 								    <a href="#">
-								      <img class="media-object" src="img/publisher.png" alt="...">
+								      <img class="media-object" src="{% static 'music/img/publisher.png'%}" alt="...">
 								    </a>
 								  </div>
 								  <div class="media-body">
@@ -733,7 +720,7 @@
 								<div class="col-md-9 col-md-push-3 col-sm-8 col-sm-push-4 col-xs-12 media">
 								  <div class="pull-right">
 								    <a href="#">
-								      <img class="media-object" src="img/folder2.png" alt="...">
+								      <img class="media-object" src="{% static 'music/img/folder2.png'%}" alt="...">
 								    </a>
 								  </div>
 								  <div class="media-body detail2">
@@ -745,11 +732,11 @@
 							    		<li>|</li>
 							    		<li>
 							    			<ul class="stars">
-							    				<li><img src="img/starEmpty.png" alt=""></li>
-							    				<li><img src="img/starFill.png" alt=""></li>
-							    				<li><img src="img/starFill.png" alt=""></li>
-							    				<li><img src="img/starFill.png" alt=""></li>
-							    				<li><img src="img/starFill.png" alt=""></li>
+							    				<li><img src="{% static 'music/img/starEmpty.png'%}" alt=""></li>
+							    				<li><img src="{% static 'music/img/starFill.png'%}" alt=""></li>
+							    				<li><img src="{% static 'music/img/starFill.png'%}" alt=""></li>
+							    				<li><img src="{% static 'music/img/starFill.png'%}" alt=""></li>
+							    				<li><img src="{% static 'music/img/starFill.png'%}" alt=""></li>
 							    			</ul>
 							    		</li>
 							    	</ul>
@@ -757,9 +744,9 @@
 								</div>
 								<div class="col-md-3 col-md-pull-9 col-sm-4 col-sm-pull-8 col-xs-12 text-left">
 									<ul class="ZDmneu">
-										<li><a href=""><img src="img/add.png" alt=""></a></li>
-										<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-										<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
+										<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+										<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+										<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
 									</ul>
 									<p class="size">قیمت کل :</p>
 									<p class="size">4000 تومان</p>
@@ -779,20 +766,20 @@
 								            	</div>
 								            	<div class="pull-left">
 								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
+									    				<li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
+									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
 									    			</ul>
 								            	</div>
 								            	<div class="clear"></div>
 								            </td>
 								            <td class="items">
 								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
+													<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+													<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+													<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
 												</ul>
 								            </td>
 							          	</tr>
@@ -804,273 +791,25 @@
 								            	</div>
 								            	<div class="pull-left">
 								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
+									    				<li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
+									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
 									    			</ul>
 								            	</div>
 								            	<div class="clear"></div>
 								            </td>
 								            <td class="items">
 								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
+													<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+													<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+													<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
 												</ul>
 								            </td>
 							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="img/starEmptyGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    				<li><img src="img/starFillGray.png" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="img/add.png" alt=""></a></li>
-													<li><a href=""><img src="img/playSmall.png" alt=""></a></li>
-													<li><a href=""><img src="img/downloadWhite.png" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
+
+
 							        </tbody>
 							  	</table>
 							</div>
@@ -1097,9 +836,9 @@
 			<div class="col-md-12 col-sm-12 col-xs-12 navBg no-padding">
 				<div class="container">
 					<div class="col-md-3 col-sm-3 col-xs-12 social-icon">
-						<a href=""><img class="img-responsive" src="img/facebook.png" alt=""></a>
-						<a href=""><img class="img-responsive" src="img/twitter.png" alt=""></a>
-						<a href=""><img class="img-responsive" src="img/pinterest.png" alt=""></a>
+						<a href=""><img class="img-responsive" src="{% static 'music/img/facebook.png'%}" alt=""></a>
+						<a href=""><img class="img-responsive" src="{% static 'music/img/twitter.png'%}" alt=""></a>
+						<a href=""><img class="img-responsive" src="{% static 'music/img/pinterest.png'%}" alt=""></a>
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-12 footerlinks">
 						<ul>
@@ -1118,14 +857,15 @@
 						<div class="media">
 							<div class="pull-right" style="padding-left:15px;">
 							    <a href="#">
-							      	<img class="media-object img-responsive" src="img/2_03.png" alt="...">
+							      	<img class="media-object img-responsive" src="{% static 'music/img/2_03.png'%}" alt="...">
 							    </a>
 							</div>
 							<div class="media-body">
 							    <p style="padding:10px 0px 5px 0px;">ایجاد شده در : </p>
 							    <a href="http://gereh.ir/">
-							      	<img class="img-responsive" src="img/gereh.png" alt="...">
+							      	<img class="img-responsive" src="{% static 'music/img/gereh.png'%}" alt="...">
 							    </a>
+
 							</div>
 						</div>
 					</div>
@@ -1133,7 +873,9 @@
 			</div>
 		</footer>
 	</div>
-	<script type="text/javascript" src="js/masterslider.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+
+	<script type="text/javascript" src="{% static 'music/js/masterslider.js'%}"></script>
+	<script type="text/javascript" src="{% static 'music/js/app.js'%}"></script>
 </body>
+
 </html>
