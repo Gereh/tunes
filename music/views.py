@@ -11,3 +11,6 @@ def home(request):
                                          'most_visited': most_visited,
                                          'most_downloaded': most_downloaded,
                                          'advertises': advertises})
+
+def album(requset):
+    return render(requset,'album.html')
