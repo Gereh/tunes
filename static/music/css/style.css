@@ -1,0 +1,543 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video 
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+@font-face 
+{
+	font-family:'iranian-sans';
+	src:
+	url('../fonts/iranian-sans.otf') format('woff'),  
+	url('../fonts/iranian-sans.ttf') format('truetype');  
+}
+body
+{
+	font-family:'iranian-sans';
+	direction: rtl;
+	font-size: 13px;
+	background-image: url("../img/bottomBg.png"), url("../img/topBg.png");
+    background-position: center bottom, center top;
+    background-repeat: no-repeat, no-repeat;
+}
+.no-padding
+{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.my-padding
+{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.img-responsive
+{
+	display: inline;
+}
+.fa
+{
+	font-size: 15px !important;
+}
+a:hover
+{
+	text-decoration: none;
+}
+.clear
+{
+	clear: both;
+	
+}
+p
+{
+	color: #fff;
+}
+/************************Nav************************/
+.navBg
+{
+	background: rgba(0, 0, 0, 0.85);
+    padding: 10px 0px;
+}
+.logo
+{
+	min-height: 70px;
+}
+.player
+{
+	min-height: 70px;
+}
+.search
+{
+	border-left: solid 1px #fff;
+	border-right: solid 1px #fff;
+	color: #fff;
+	min-height: 70px;
+}
+.form-group
+{
+	margin-bottom: 0px;
+	margin-top: 17px;
+}
+.form-control
+{
+	background-color: rgba(97, 97, 97, 0.60) !important;
+	border-radius: 0px;
+	border: none;
+	color: #fff;
+}
+.form-control:focus
+{
+	outline: none;
+	box-shadow: none;
+	border:none;
+}
+.detail p
+{
+	color: #fff;
+	font-size: 12px;
+}
+.account
+{
+	border-right: solid 1px #fff;
+	min-height: 70px;
+}
+.detail ul li
+{
+	display: inline-table;
+	color: #fff;
+	font-size: 10px;
+}
+.media-right, .media>.pull-right
+{
+	padding-left: 5px;
+}
+.jp-previous
+{
+	background: url("../img/pre.png") no-repeat;
+	border: none;
+	width: 32px;
+	height: 38px;
+	outline: none;
+}
+.jp-play
+{
+	background: url("../img/play.png") no-repeat;
+	border: none;
+	width: 44px;
+	height: 44px;
+}
+.jp-next
+{
+	background: url("../img/next.png") no-repeat;
+	border: none;
+	width: 32px;
+	height: 38px;
+	outline: none;
+}
+.jp-mute
+{
+	background: url("../img/volume.png") no-repeat;
+	border: none;
+	width: 32px;
+	height: 38px;
+	outline: none;
+}
+.jp-playlistbtn
+{
+	background: url("../img/playlist.png") no-repeat;
+	border: none;
+	width: 32px;
+	height: 38px;
+	outline: none;
+}
+.jp-controls
+{
+	float: left;
+}
+
+.jp-seek-bar
+{
+	background:#fff;
+	height: 100%;
+    cursor: pointer;
+    width: 100%;
+}
+.progress
+{
+	height: 5px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	direction: ltr;
+}
+.jp-play-bar {
+    background: #e23646;
+    width: 0px;
+    height: 5px;
+}
+marquee
+{
+	width: 137px;
+}
+.footerlinks ul{
+	padding-top: 35px;
+}
+.footerlinks ul li
+{
+	display: inline-table;
+	padding: 0px 5px;
+} 
+.footerlinks ul li a
+{
+	color: #fff;
+	font-size: 13px;
+}
+.social-icon
+{
+	padding-top: 20px;
+	text-align: left;
+}
+.displayplaylist
+{
+	position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 10px;
+    margin: 10px 0 0;
+    list-style: none;
+    text-align: right;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+}
+.jp-playlist-current
+{
+	list-style-type: none;
+}
+.jp-playlist-current a
+{
+	color: #fff;
+}
+a.jp-playlist-item-remove
+{
+	float: left;
+	background: url("../img/remove.png") no-repeat;
+	color: transparent;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+    left: 10px;
+}
+.myPlaylist
+{
+	display: inline;
+	position: absolute;
+	right: 65px;
+	width: 339px;
+}
+.jp-jplayer
+{
+	display: inline !important;
+}
+.imgpadding
+{
+	padding-left: 5px;
+}
+.arrow
+{
+	padding-bottom: 30px;
+}
+.cover
+{
+	padding-bottom: 30px;
+}
+.title p
+{
+	color: #fff;
+    background-color: #000;
+    padding: 5px;
+    min-width: 150px;
+}
+.title p .fa
+{
+	margin-left: 5px;
+}
+.title
+{
+	border-bottom: solid 2px #000;
+}
+/* Previous button  */
+.media-carousel .carousel-control.left 
+{
+  left: -12px;
+  background-image: none;
+  height: 40px;
+  width : 40px;
+  top: 40%;
+   opacity:1 !important;
+}
+/* Next button  */
+.media-carousel .carousel-control.right 
+{
+  right: -12px !important;
+  background-image: none;
+  height: 40px;
+  width : 40px;
+  top: 40%;
+  opacity:1 !important;
+}
+/* Changes the position of the indicators */
+.media-carousel .carousel-indicators 
+{
+  right: 50%;
+  top: auto;
+  bottom: 0px;
+  margin-right: -19px;
+}
+/* Changes the colour of the indicators */
+.media-carousel .carousel-indicators li 
+{
+  background: #c0c0c0;
+}
+.media-carousel .carousel-indicators .active 
+{
+  background: #333333;
+}
+
+.carousel {
+    position: relative;
+    padding: 15px 30px;
+    padding-top: 0px;
+}
+/**********************************************AlbumPage.html**********************************************/
+/*.cover-bg
+{
+	background: url("../img/albumcover.png") no-repeat top center;
+	min-height: 1000px;
+	background-size: 100% 700px;
+}*/
+.paddingTop
+{
+	padding-top: 15px;
+}
+.ZDmneu li
+{
+	display: inline-table;
+}
+
+ul.publisher li
+{
+	list-style-type: square;
+	list-style-position: inside;
+	font-size: 15px;
+	padding-bottom: 5px;
+}
+ul.publisher li a
+{
+	color: #333;
+}
+.albumDetail
+{
+	background: #333231;
+	padding: 10px 0px;
+	color: #fff;
+}
+.detail2 ul
+{
+	padding-top: 7px;
+}
+.detail2 ul li
+{
+	display: inline-table;
+	font-size: 13px;
+}
+ul.stars li
+{
+	display: inline-table;
+}
+.size
+{
+	font-size: 12px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th
+{
+	border-top: 5px solid #fff;
+}
+.number
+{
+	width: 50px;
+	background: #333333;
+	border-left: 5px #fff solid;
+	color: #fff;
+	text-align: center;
+}
+.track
+{
+	width: 467px;
+	background: #333333;
+	border-left: 5px #fff solid;
+	color: #fff;
+	text-align: right;
+}
+.items
+{
+	background: #333333;
+	color: #fff;
+	text-align: center;
+}
+.scrollbar::-webkit-scrollbar-track
+{
+	background-color: #959595;
+	border-radius: 3px;
+	margin: 10px 0px;
+}
+
+.scrollbar::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb
+{
+	background-color: #333;
+	border-radius: 3px;
+}
+
+.scrollbar::-moz-scrollbar-track
+{
+	background-color: #959595;
+	border-radius: 3px;
+	margin: 10px 0px;
+}
+
+.scrollbar::-moz-scrollbar
+{
+	width: 3px;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+.scrollbar::-moz-scrollbar-thumb
+{
+	background-color: #333;
+	border-radius: 3px;
+}
+p.description
+{
+	font-size: 13px;
+	color: #333;
+	line-height: 25px;
+	text-align: justify;
+	padding: 10px;
+	padding-top: 0px;
+}
+.padding-bottom
+{
+	padding-bottom: 15px;
+}
+.thumbnail {
+    position:relative;
+    overflow:hidden;
+}
+ 
+.caption {
+    position:absolute;
+    top:-100%;
+    right:0;
+    background:rgba(0, 0, 0, 0.75);
+    width:100%;
+    height:100%;
+    padding:2%;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.thumbnail:hover .caption {
+    top:0%;
+}
+.ms-info .media
+{
+	background-color: #000;
+    padding: 10px 10px 5px 5px;
+}
+.ms-info .media .media-body h4
+{
+	line-height: 17px;
+}
+.ms-info .media .media-body p
+{
+	font-size: 11px;
+    line-height: 10px;
+}
+.height300
+{
+	min-height: 300px;
+}
+.height200
+{
+	min-height: 200px;
+}
+ul.artistsocial
+{
+	padding-top: 15px;
+}
+ul.artistsocial li
+{
+	display: inline-table;
+}
+.box-body
+{
+	padding-top: 15px;
+}
+.artistName
+{
+	padding: 0px 0px 150px 0px;
+}
+.atriststyle
+{
+	width: 350px;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 15px;
+    text-align: left;
+    color: #fff;
+}
+select.selector
+{
+	background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 3px;
+    height: 24px;
+    width: 110px;
+}
+button#next , button#prev , button#next1 , button#prev1 , button#next2 , button#prev2
+{
+	height: 24px;
+	background-color: #000;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+.jp-playlist ul li
+{
+	list-style-type: none !important;
+}
