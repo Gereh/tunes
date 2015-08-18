@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from music import views
+from django.conf import settings
 
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^music/', include('music.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    #media
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 ]

@@ -14,9 +14,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Admin',
             fields=[
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(null=True, verbose_name='last login', blank=True)),
-                ('userName', models.CharField(max_length=50, unique=True, primary_key=True, serialize=False)),
+                ('password', models.CharField(verbose_name='password', max_length=128)),
+                ('last_login', models.DateTimeField(blank=True, verbose_name='last login', null=True)),
+                ('userName', models.CharField(unique=True, serialize=False, max_length=50, primary_key=True)),
                 ('name', models.CharField(max_length=50)),
                 ('email', models.EmailField(max_length=254)),
                 ('balance', models.IntegerField()),
@@ -30,20 +30,35 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Album',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('name', models.CharField(max_length=30)),
                 ('description', models.TextField()),
                 ('price', models.IntegerField()),
+                ('downloads', models.IntegerField(default=0)),
                 ('licenseNo', models.CharField(max_length=50)),
                 ('publishDate', models.DateTimeField()),
+                ('visits', models.IntegerField(default=0)),
+                ('sliderImg', models.ImageField(default='music/album/sliderImg/default.jpg', upload_to='music/album/sliderImg')),
+                ('thumbImg', models.ImageField(default='music/album/thumbImg/default.jpg', upload_to='music/album/thumbImg')),
+                ('backImg', models.ImageField(default='music/album/backImg/default.jpg', upload_to='music/album/backImg')),
+                ('iconImg', models.ImageField(default='music/album/iconImg/default.jpg', upload_to='music/album/iconImg')),
+                ('publisherImg', models.ImageField(default='music/album/publisherImg/default.jpg', upload_to='music/album/publisherImg')),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('updateAt', models.DateTimeField(auto_now=True)),
             ],
         ),
         migrations.CreateModel(
+            name='AlbumCover',
+            fields=[
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('img', models.ImageField(default='music/albumcover/img/default.jpg', upload_to='music/albumcover/img')),
+                ('albumID', models.ForeignKey(to='music.Album')),
+            ],
+        ),
+        migrations.CreateModel(
             name='AlbumOwner',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('percent', models.IntegerField()),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('updateAt', models.DateTimeField(auto_now=True)),
@@ -54,7 +69,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Artist',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('name', models.CharField(max_length=30)),
                 ('description', models.TextField()),
                 ('bio', models.TextField()),
@@ -67,7 +82,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='BankTransaction',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('date', models.DateTimeField()),
                 ('amount', models.IntegerField()),
                 ('bank', models.CharField(max_length=20)),
@@ -78,7 +93,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Comment',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('message', models.TextField()),
                 ('isConfirmed', models.BooleanField(default=False)),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
@@ -88,7 +103,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Playlist',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('albumID', models.ForeignKey(to='music.Album')),
             ],
@@ -96,7 +111,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Post',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('title', models.CharField(max_length=50)),
                 ('content', models.TextField()),
                 ('likeCount', models.IntegerField(default=0)),
@@ -110,7 +125,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SiteTransaction',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('date', models.DateTimeField()),
                 ('amount', models.IntegerField()),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
@@ -119,7 +134,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Track',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('name', models.CharField(max_length=30)),
                 ('link', models.FileField(upload_to='')),
                 ('rateCount', models.IntegerField()),
@@ -136,12 +151,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(null=True, verbose_name='last login', blank=True)),
-                ('userName', models.CharField(max_length=30, unique=music.models.Track, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=30, blank=True)),
+                ('password', models.CharField(verbose_name='password', max_length=128)),
+                ('last_login', models.DateTimeField(blank=True, verbose_name='last login', null=True)),
+                ('userName', models.CharField(unique=music.models.Track, serialize=False, max_length=30, primary_key=True)),
+                ('name', models.CharField(blank=True, max_length=30)),
                 ('email', models.EmailField(max_length=254)),
-                ('phone', models.CharField(max_length=10, blank=True)),
+                ('phone', models.CharField(blank=True, max_length=10)),
                 ('address', models.TextField(blank=True)),
                 ('balance', models.IntegerField(default=0)),
                 ('isGold', models.BooleanField(default=False)),
@@ -188,6 +203,11 @@ class Migration(migrations.Migration):
             model_name='album',
             name='artistID',
             field=models.ManyToManyField(to='music.Artist'),
+        ),
+        migrations.AddField(
+            model_name='album',
+            name='mainTrack',
+            field=models.OneToOneField(null=True, blank=True, to='music.Track'),
         ),
         migrations.AlterUniqueTogether(
             name='playlist',

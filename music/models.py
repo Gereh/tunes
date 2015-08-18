@@ -14,28 +14,55 @@ class Artist(models.Model):
     updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return u'%s' % self.name
+        return self.name
+
+
 
 
 class Album(models.Model):
     name = models.CharField(max_length=30)
     artistID = models.ManyToManyField(Artist)
+    mainTrack = models.OneToOneField('Track', blank=True, null=True)
     description = models.TextField()
     price = models.IntegerField()
+    downloads = models.IntegerField(default=0)
     licenseNo = models.CharField(max_length=50)
     publishDate = models.DateTimeField()
+    visits = models.IntegerField(default=0)
+    sliderImg = models.ImageField(upload_to="music/album/sliderImg", default="music/album/sliderImg/default.jpg")
+    thumbImg = models.ImageField(upload_to="music/album/thumbImg", default="music/album/thumbImg/default.jpg")
+    backImg = models.ImageField(upload_to="music/album/backImg", default="music/album/backImg/default.jpg")
+    iconImg = models.ImageField(upload_to="music/album/iconImg", default="music/album/iconImg/default.jpg")
+    publisherImg = models.ImageField(upload_to="music/album/publisherImg", default="music/album/publisherImg/default.jpg")
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return u'%s by %s' % (self.name, str(self.artistID))
 
+    def __str__(self):
+        return self.name
+
+
+class AlbumCover(models.Model):
+    albumID = models.ForeignKey(Album)
+    img = models.ImageField(upload_to="music/albumcover/img", default="music/albumcover/img/default.jpg")
+
+
+class Advertise(models.Model):
+    title = models.CharField(max_length=50, blank=True, null=True)
+    link = models.CharField(max_length=100, default="#")
+    position = models.CharField(max_length=20, default="home")
+    img = models.ImageField(upload_to="music/advertise/img",default="music/advertise/img/default.jpg")
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
+
 
 class Track(models.Model):
     name = models.CharField(max_length=30)
     artistID = models.ManyToManyField(Artist)
     albumID = models.ForeignKey(Album)
-    link = models.FileField(upload_to="")
+    link = models.FileField(upload_to="music/track/link")
     rateCount = models.IntegerField()
     rate = models.IntegerField(default=0, choices=((0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),))
     lyric = models.TextField(blank=True)

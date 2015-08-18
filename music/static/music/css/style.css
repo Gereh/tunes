@@ -537,3 +537,7 @@ button#next , button#prev , button#next1 , button#prev1 , button#next2 , button#
     border: none;
     outline: none;
 }
+.jp-playlist ul li
+{
+	list-style-type: none !important;
+}
