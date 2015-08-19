@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Artist(models.Model):
     name = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=50, unique=True, null=True)
     description = models.TextField()
     bio = models.TextField()
     profileImg = models.ImageField(upload_to="media/artist/profileImg", default="media/artist/profileImg/default.jpg")
@@ -21,8 +22,10 @@ class Artist(models.Model):
 
 class Album(models.Model):
     name = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=50, unique=True, null=True)
     artistID = models.ManyToManyField(Artist)
     mainTrack = models.OneToOneField('Track', blank=True, null=True)
+    publisherName = models.CharField(max_length=30)
     description = models.TextField()
     price = models.IntegerField()
     downloads = models.IntegerField(default=0)

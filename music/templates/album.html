@@ -652,11 +652,11 @@
 			</div>
 		</nav>
 		<section class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12 cover-bg" style="background: url('img/albumcover.png') no-repeat top center; background-size: 100% 500px; padding:300px 0px; min-height: 500px;">
+			<div class="col-md-12 col-sm-12 col-xs-12 cover-bg" style="background: url('{{ album.backImg.url }}') no-repeat top center; background-size: 100% 500px; padding:300px 0px; min-height: 500px;">
 				<div class="container">
 					<div class="col-md-4 col-md-push-8 col-sm-4 col-sm-push-8 col-xs-12">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-							<img src="{% static 'music/img/albumCover2.png'%}" alt="" class="img-responsive">
+							<img src="{{ album.iconImg.url }}" alt="" class="img-responsive">
 						</div>
 						<div class="col-md-12 col-sm-12 col-xs-12 paddingTop no-padding">
 							<div class="title">
@@ -672,14 +672,15 @@
 							<div class="box-body">
 								<div class="carousel slide media-carousel" id="media1">
 							        <div class="carousel-inner">
-							          <div class="item  active">
-							            <div class="row">
-							              <div class="col-md-12">
-							                <a href="#"><img class="img-responsive" alt="" src="{% static 'music/img/albumCover3.png'%}"></a>
-							              </div>       
-							            </div>
-							          </div>
-
+                                        {% for cover in album_covers %}
+                                          <div class="item {% ifequal forloop.first True %}active{% endifequal %}">
+                                            <div class="row">
+                                              <div class="col-md-12">
+                                                <a href="#"><img class="img-responsive" alt="" src="{{ cover.img.url }}"></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        {% endfor %}
 							        </div>
 							        <a data-slide="prev" href="#media1" class="left carousel-control"><img src="{% static 'music/img/sliderPrev.png'%}" alt=""></a>
 							        <a data-slide="next" href="#media1" class="right carousel-control"><img src="{% static 'music/img/sliderNext.png'%}" alt=""></a>
@@ -697,16 +698,26 @@
 								<div class="media">
 								  <div class="pull-left">
 								    <a href="#">
-								      <img class="media-object" src="{% static 'music/img/publisher.png'%}" alt="...">
+								      <img class="media-object" src="{{ album.publisherImg.url }}" alt="...">
 								    </a>
 								  </div>
 								  <div class="media-body">
 								    <ul class="publisher">
-								    	<li>ناشر : آوای باربد</li>
-								    	<li>سال انتشار : 1392</li>
-								    	<li>شماره مجوز : 12345</li>
-								    	<li>وب سایت آلبوم</li>
-								    	<li>ناشر : آوای باربد</li>
+                                        <li><span>ناشر : </span>
+                                            {{ album.publisherName }}
+                                        </li>
+                                        <li>
+                                            <span>سال انتشار : </span>
+                                            {{ album.publishDate | date:"Y" }}
+                                        </li>
+                                        <li>
+                                            <span>شماره مجوز : </span>
+                                            {{ album.licenseNo }}
+                                        </li>
+                                        <li>
+                                            <span>وب سایت : </span>
+                                            {{ album.website }}
+                                        </li>
 								    </ul>
 								  </div>
 								</div>
@@ -723,11 +734,11 @@
 								    </a>
 								  </div>
 								  <div class="media-body detail2">
-								    <h4>من خود آن سیزدهم</h4>
+								    <h4>{{ album.name }}</h4>
 								    <ul>
-							    		<li>محسن چاوشی</li>
+							    		<li>{% for artist in album.artistID.all %}{{ artist.name }}{% endfor %}</li>
 							    		<li>|</li>
-							    		<li>پاپ</li>
+							    		<li>???</li>
 							    		<li>|</li>
 							    		<li>
 							    			<ul class="stars">
@@ -748,7 +759,7 @@
 										<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
 									</ul>
 									<p class="size">قیمت کل :</p>
-									<p class="size">4000 تومان</p>
+									<p class="size">{{ album.price }}</p>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -757,11 +768,12 @@
 							<div class="table-responsive">
 							  	<table class="table">
 							    	<tbody>
+                                    {% for track in tracks %}
 							          	<tr>
-								            <th class="number" scope="row">1</th>
+								            <th class="number" scope="row">{{ forloop.counter }}</th>
 								            <td class="track">
 								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
+								            		<p>{{ track.name }}</p>
 								            	</div>
 								            	<div class="pull-left">
 								            		<ul class="stars">
@@ -776,39 +788,13 @@
 								            </td>
 								            <td class="items">
 								            	<ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+													<li><a href="javascript:;" id="playlist-add-{{ myAlbum.id }}"><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+													<li><a href="javascript:;" id="playlist-play-{{ myAlbum.id }}"><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+													<li><a href="/music/buy/"><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
 												</ul>
 								            </td>
 							          	</tr>
-							          	<tr>
-								            <th class="number" scope="row">1</th>
-								            <td class="track">
-								            	<div class="pull-right">
-								            		<p>ترک شماره یک</p>
-								            	</div>
-								            	<div class="pull-left">
-								            		<ul class="stars">
-									    				<li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
-									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
-									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
-									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
-									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
-									    			</ul>
-								            	</div>
-								            	<div class="clear"></div>
-								            </td>
-								            <td class="items">
-								            	<ul class="ZDmneu">
-													<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
-													<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
-												</ul>
-								            </td>
-							          	</tr>
-
-
+                                    {% endfor %}
 							        </tbody>
 							  	</table>
 							</div>
@@ -822,8 +808,7 @@
 							</div>
 							<div class="box-body scrollbar" style="max-height:225px; overflow: auto;">
 								<p class="description">
-									توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات 
-									توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات 
+									{{ album.description }}
 								</p>
 							</div>
 						</div>

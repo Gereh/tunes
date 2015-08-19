@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Playlist, Album, Track, Artist, User, Advertise
+from .models import *
 
 
 
@@ -8,9 +8,13 @@ class TrackInline(admin.StackedInline):
     extra = 0
 
 
+class AlbumCoverInline(admin.StackedInline):
+    model = AlbumCover
+    extra = 0
+
 
 class AlbumAdmin(admin.ModelAdmin):
-    inlines = [TrackInline]
+    inlines = [TrackInline, AlbumCoverInline]
     list_display = ('id', 'name',)
 
 class ArtistAdmin(admin.ModelAdmin):
