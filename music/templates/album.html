@@ -639,7 +639,7 @@
 						<p>
 							<strong>جست و جو</strong> (نام هنرمند، نام آلبوم ، نام قطعه)
 						</p>
-						<form action="">
+						<form action="search" method="get">
 							<div class="form-group">
 							    <input type="text" class="form-control" id="search" placeholder="">
 							</div>
@@ -714,10 +714,11 @@
                                             <span>شماره مجوز : </span>
                                             {{ album.licenseNo }}
                                         </li>
-                                        <li>
-                                            <span>وب سایت : </span>
-                                            {{ album.website }}
-                                        </li>
+                                        {% if album.website %}
+                                            <li>
+                                                <a target="_blank" href="{{ album.website }}">وب سایت</a>
+                                            </li>
+                                        {% endif %}
 								    </ul>
 								  </div>
 								</div>
@@ -738,7 +739,7 @@
 								    <ul>
 							    		<li>{% for artist in album.artistID.all %}{{ artist.name }}{% endfor %}</li>
 							    		<li>|</li>
-							    		<li>???</li>
+							    		<li>{{ album.style }}</li>
 							    		<li>|</li>
 							    		<li>
 							    			<ul class="stars">
@@ -754,8 +755,8 @@
 								</div>
 								<div class="col-md-3 col-md-pull-9 col-sm-4 col-sm-pull-8 col-xs-12 text-left">
 									<ul class="ZDmneu">
-										<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
-										<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+										<li><a href="javascript:;" id="playlist-add-all"><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+										<li><a href="javascript:;" id="playlist-play-all"><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
 										<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
 									</ul>
 									<p class="size">قیمت کل :</p>
@@ -777,11 +778,31 @@
 								            	</div>
 								            	<div class="pull-left">
 								            		<ul class="stars">
-									    				<li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
-									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
-									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
-									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
-									    				<li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+                                                        {% if track.rate >= 5 %}
+                                                            <li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+                                                        {% else %}
+                                                            <li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
+                                                        {% endif %}
+                                                        {% if track.rate >= 4 %}
+                                                            <li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+                                                        {% else %}
+                                                            <li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
+                                                        {% endif %}
+									    				{% if track.rate >= 3 %}
+                                                            <li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+                                                        {% else %}
+                                                            <li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
+                                                        {% endif %}
+                                                        {% if track.rate >= 2 %}
+                                                            <li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+                                                        {% else %}
+                                                            <li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
+                                                        {% endif %}
+                                                        {% if track.rate >= 1 %}
+                                                            <li><img src="{% static 'music/img/starFillGray.png'%}" alt=""></li>
+                                                        {% else %}
+                                                            <li><img src="{% static 'music/img/starEmptyGray.png'%}" alt=""></li>
+                                                        {% endif %}
 									    			</ul>
 								            	</div>
 								            	<div class="clear"></div>

@@ -17,8 +17,17 @@ class AlbumAdmin(admin.ModelAdmin):
     inlines = [TrackInline, AlbumCoverInline]
     list_display = ('id', 'name',)
 
+class ArtistPosterAdmin(admin.StackedInline):
+    model = ArtistPoster
+    extra = 3
+
+class ArtistPostAdmin(admin.StackedInline):
+    model = Post
+    extra = 1
+
 class ArtistAdmin(admin.ModelAdmin):
     list_display = ('id', 'name',)
+    inlines = [ArtistPosterAdmin,ArtistPostAdmin]
 
 class TrackAdmin(admin.ModelAdmin):
     list_display = ('name',)

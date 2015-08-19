@@ -639,7 +639,7 @@
 						<p>
 							<strong>جست و جو</strong> (نام هنرمند، نام آلبوم ، نام قطعه)
 						</p>
-						<form action="">
+						<form action="search" method="get">
 							<div class="form-group">
 							    <input type="text" class="form-control" id="search" placeholder="">
 							</div>
@@ -655,8 +655,8 @@
 			<div class="col-md-12 col-sm-12 col-xs-12 cover-bg" style="background: url('{% static 'music/img/up.jpg'%}') no-repeat top center; background-size: 100% 500px; padding:150px 0px 100px 0px; min-height: 500px;">
 				<div class="col-md-12 col-sm-12 col-xs-12 artistName">
 					<div class="atriststyle">
-						<h4 style="font-size: 23px;">محسن چاوشی</h4>
-						<p>خواننده و آهنگ ساز</p>
+						<h4 style="font-size: 23px;">{{ artist.name }}</h4>
+						<p>{{ artist.title }}</p>
 					</div>
 				</div>
 				<div class="container">
@@ -674,13 +674,15 @@
 							<div class="box-body">
 								<div class="carousel slide media-carousel" id="media1">
 							        <div class="carousel-inner">
-							          <div class="item  active">
-							            <div class="row">
-							              <div class="col-md-12">
-							                <a href="#"><img class="img-responsive" alt="" src="{% static 'music/img/albumCover3.png'%}"></a>
-							              </div>       
-							            </div>
-							          </div>
+                                        {% for poster in posters %}
+                                          <div class="item  {% ifequal forloop.first True %}active{% endifequal %}">
+                                            <div class="row">
+                                              <div class="col-md-12">
+                                                <a href="#"><img class="img-responsive" alt="" src="{{ poster.img.url }}"></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        {% endfor %}
 							        </div>
 							        <a data-slide="prev" href="#media1" class="left carousel-control"><img src="{% static 'music/img/sliderPrev.png'%}" alt=""></a>
 							        <a data-slide="next" href="#media1" class="right carousel-control"><img src="{% static 'music/img/sliderNext.png'%}" alt=""></a>
@@ -696,16 +698,16 @@
 							</div>
 							<div class="box-body">
 								<ul class="text-center artistsocial">
-									<li><a href=""><img src="{% static 'music/img/social (1).png'%}" alt=""></a></li>
-									<li><a href=""><img src="{% static 'music/img/social (2).png'%}" alt=""></a></li>
-									<li><a href=""><img src="{% static 'music/img/social (3).png'%}" alt=""></a></li>
-									<li><a href=""><img src="{% static 'music/img/social (4).png'%}" alt=""></a></li>
+									<li><a href="{{ artist.twitter }}"><img src="{% static 'music/img/social (1).png'%}" alt=""></a></li>
+									<li><a href="{{ artist.rss }}"><img src="{% static 'music/img/social (2).png'%}" alt=""></a></li>
+									<li><a href="{{ artist.facebook }}"><img src="{% static 'music/img/social (3).png'%}" alt=""></a></li>
+									<li><a href="{{ artist.youtube }}"><img src="{% static 'music/img/social (4).png'%}" alt=""></a></li>
 								</ul>
 								<br>
 
 								<ul class="publisher">
-							    	<li>وب سایت شخصی</li>
-							    	<li>وبلاگ شخصی</li>
+							    	<li><a href="{{ artist.website }}">وب سایت شخصی</a></li>
+							    	<li><a href="{{ artist.weblog }}">وبلاگ شخصی</a></li>
 							    </ul>
 							</div>
 						</div>
@@ -720,8 +722,7 @@
 							</div>
 							<div class="box-body scrollbar" style="max-height:245px; overflow: auto;">
 								<p class="description">
-									توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات 
-									توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات توضیحات 
+									{{ artist.bio }}
 								</p>
 							</div>
 						</div>
@@ -734,12 +735,9 @@
 							</div>
 							<div class="box-body scrollbar" style="max-height:245px; overflow: auto;">
 								<ul class="publisher">
-									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
-									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
-									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
-									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
-									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
-									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+                                    {% for post in posts %}
+                                        <li><a href="post/{{ post.id }}/">{{ post.title }}</a></li>
+									{% endfor %}
 								</ul>
 							</div>
 						</div>
@@ -750,36 +748,27 @@
 								<p class="pull-right">
 									<span class="fa fa-bars"></span>آثار
 								</p>
-								<div class="pull-left">
-									<button type="button" id="next2"><span class="fa fa-chevron-right"></span></button>
-									<select class="selector" id="mycars2">
-									   <option value="volvo">Volvo</option>
-									   <option value="saab">Saab</option>
-									   <option value="mercedes">Mercedes</option>
-									   <option value="audi">Audi</option>
-									</select>
-									<button type="button" id="prev2"><span class="fa fa-chevron-left"></span></button>
-								</div>
 								<div class="clear"></div>
 							</div>
 							<div class="box-body">
-								<div class="col-md-3">
+                                {% for album in albums %}
+								    <div class="col-md-3">
 					                <div class="thumbnail">
 						                <div class="caption">
 						                	<br>
-						                    <h4>من خود آن سیزدهم</h4>
-						                    <p>محسن چاوشی</p>
+						                    <h4>{{ album.name }}</h4>
+						                    <p>{% for artist in album.artistID.all %}{{ artist.name }}{% endfor %}</p>
 						                    <br>
 						                    <ul class="ZDmneu">
-												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
-												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href="javascript:;"><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href="javascript:;" id="playlist-play-{{ album.id }}"><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
 												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
 											</ul>
 						                </div>
-						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						                <img class="img-responsive" alt="" src="{{ album.thumbImg.url }}">
 						            </div>
 					            </div> 
-
+                                {% endfor %}
 							</div>
 						</div>
 					</div>

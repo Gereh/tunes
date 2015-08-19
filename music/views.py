@@ -27,4 +27,17 @@ def album(requset, album_slug):
 
 
 def artist(requset, artist_slug):
-    return render(requset,'artist.html')
+    try:
+        artist = Artist.objects.get(slug=artist_slug)
+    except Artist.DoesNotExist:
+        raise Http404
+    posters = ArtistPoster.objects.filter(artistID=artist.id)
+    albums = Album.objects.filter(artistID=artist.id)
+    posts = Post.objects.filter(artistID=artist.id)
+    return render(requset,'artist.html',{'posters': posters,
+                                          'albums': albums,
+                                          'artist': artist,
+                                          'posts': posts})
+
+def post(request, artist_slug, post_id):
+    return render(request,"artist.html")

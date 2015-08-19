@@ -1,16 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import User
-
+from django.contrib.auth.hashers import make_password
 
 
 class Artist(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=50, unique=True, null=True)
-    description = models.TextField()
+    title = models.CharField(max_length=50)
     bio = models.TextField()
-    profileImg = models.ImageField(upload_to="media/artist/profileImg", default="media/artist/profileImg/default.jpg")
-    coverImg = models.ImageField(upload_to="media/artist/coverImg", default="media/artist/coverImg/default.jpg")
+    weblog = models.CharField(max_length=100, default='#')
+    website = models.CharField(max_length=100, default='#')
+    rss = models.CharField(max_length=100, default='#')
+    youtube = models.CharField(max_length=100, default='#')
+    facebook = models.CharField(max_length=100, default='#')
+    twitter = models.CharField(max_length=100, default='#')
+    backImg = models.ImageField(upload_to="music/artist/backimg", default="music/artist/backimg/default.jpg")
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
 
@@ -18,6 +23,9 @@ class Artist(models.Model):
         return self.name
 
 
+class ArtistPoster(models.Model):
+    artistID = models.ForeignKey(Artist)
+    img = models.ImageField(upload_to="music/artistposter/img", default="music/artistposter/img/default.jpg")
 
 
 class Album(models.Model):
@@ -26,6 +34,8 @@ class Album(models.Model):
     artistID = models.ManyToManyField(Artist)
     mainTrack = models.OneToOneField('Track', blank=True, null=True)
     publisherName = models.CharField(max_length=30)
+    website = models.CharField(max_length=100, blank=True, null=True)
+    style = models.CharField(max_length=30)
     description = models.TextField()
     price = models.IntegerField()
     downloads = models.IntegerField(default=0)
@@ -36,9 +46,11 @@ class Album(models.Model):
     thumbImg = models.ImageField(upload_to="music/album/thumbImg", default="music/album/thumbImg/default.jpg")
     backImg = models.ImageField(upload_to="music/album/backImg", default="music/album/backImg/default.jpg")
     iconImg = models.ImageField(upload_to="music/album/iconImg", default="music/album/iconImg/default.jpg")
-    publisherImg = models.ImageField(upload_to="music/album/publisherImg", default="music/album/publisherImg/default.jpg")
+    publisherImg = models.ImageField(upload_to="music/album/publisherImg",
+                                     default="music/album/publisherImg/default.jpg")
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return u'%s by %s' % (self.name, str(self.artistID))
@@ -56,9 +68,12 @@ class Advertise(models.Model):
     title = models.CharField(max_length=50, blank=True, null=True)
     link = models.CharField(max_length=100, default="#")
     position = models.CharField(max_length=20, default="home")
-    img = models.ImageField(upload_to="music/advertise/img",default="music/advertise/img/default.jpg")
+    img = models.ImageField(upload_to="music/advertise/img", default="music/advertise/img/default.jpg")
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.title
 
 
 class Track(models.Model):
@@ -71,7 +86,7 @@ class Track(models.Model):
     lyric = models.TextField(blank=True)
     poet = models.TextField(blank=True)
     price = models.IntegerField()
-    playerImg = models.ImageField(upload_to="music/track/playerimg",default="music/track/playerimg/default.jpg")
+    playerImg = models.ImageField(upload_to="music/track/playerimg", default="music/track/playerimg/default.jpg")
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
 
@@ -103,6 +118,10 @@ class User(AbstractBaseUser):
     def get_short_name(self):
         return self.userName
 
+    def save(self, *args, **kwargs):
+        self.password = make_password(self.password)
+        super(User,self).save(*args,**kwargs)
+
 
 class Playlist(models.Model):
     userID = models.ForeignKey(User)
@@ -118,15 +137,18 @@ class Playlist(models.Model):
 
 
 class Event:
-    title=models.CharField(max_length=50)
-    artistID=models.ForeignKey(Artist)
-    description=models.TextField()
-    location=models.TextField()
-    pointLat=models.IntegerField()
-    PointLon=models.IntegerField()
-    data=models.DateField()
+    title = models.CharField(max_length=50)
+    artistID = models.ForeignKey(Artist)
+    description = models.TextField()
+    location = models.TextField()
+    pointLat = models.IntegerField()
+    PointLon = models.IntegerField()
+    data = models.DateField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.title
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
@@ -171,7 +193,7 @@ class SiteTransaction(models.Model):
 
 
 class Admin(AbstractBaseUser):
-    userName = models.CharField(primary_key=True,unique=True,max_length=50)
+    userName = models.CharField(primary_key=True, unique=True, max_length=50)
     name = models.CharField(max_length=50)
     email = models.EmailField()
     balance = models.IntegerField()
@@ -184,6 +206,6 @@ class Admin(AbstractBaseUser):
 class AlbumOwner(models.Model):
     albumID = models.ForeignKey(Album)
     adminID = models.ForeignKey(Admin)
-    percent = models.IntegerField()                                         #needed a restriction in data
+    percent = models.IntegerField()  # needed a restriction in data
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
