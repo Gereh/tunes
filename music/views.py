@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from django.http import Http404, HttpResponseRedirect, HttpResponse
-from .forms import Login
+from .forms import Login, ForgotPass, Register
 from django.contrib.auth.hashers import check_password
 
 
@@ -16,7 +16,7 @@ def home(request):
         user = None
     else:
         username = request.session.get('username')
-        try :
+        try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
             del request.session['username']
@@ -37,9 +37,9 @@ def album(requset, album_slug):
         raise Http404
     album_covers = AlbumCover.objects.filter(albumID=album.id)
     tracks = Track.objects.filter(albumID=album.id)
-    return render(requset,'album.html', {'album': album,
-                                         'album_covers': album_covers,
-                                         'tracks': tracks})
+    return render(requset, 'album.html', {'album': album,
+                                          'album_covers': album_covers,
+                                          'tracks': tracks})
 
 
 def artist(requset, artist_slug):
@@ -50,14 +50,14 @@ def artist(requset, artist_slug):
     posters = ArtistPoster.objects.filter(artistID=artist.id)
     albums = Album.objects.filter(artistID=artist.id)
     posts = Post.objects.filter(artistID=artist.id)
-    return render(requset,'artist.html',{'posters': posters,
-                                          'albums': albums,
-                                          'artist': artist,
-                                          'posts': posts})
+    return render(requset, 'artist.html', {'posters': posters,
+                                           'albums': albums,
+                                           'artist': artist,
+                                           'posts': posts})
 
 
 def post(request, artist_slug, post_id):
-    return render(request,"artist.html")
+    return render(request, "artist.html")
 
 
 def login(request):
@@ -70,15 +70,42 @@ def login(request):
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
                 return HttpResponse("faild user")
-            if check_password(password,user.password):
+            if check_password(password, user.password):
                 request.session['username'] = username
             else:
                 return HttpResponse("faild pass")
             return HttpResponseRedirect("/")
-    else :
+    else:
         return HttpResponseRedirect("/")
 
 
 def logout(requset):
     del requset.session['username']
     return HttpResponseRedirect("/")
+
+
+def register(request):
+    message = ''
+    if request.method == 'POST':
+        register_form = Register(request.POST)
+        if register_form.is_valid():
+            password1 = register_form.cleaned_data['password']
+            password2 = register_form.cleaned_data['password2']
+            if password1 == password2:
+                try:
+                    new_user = User()
+                    new_user.username = register_form.cleaned_data['username']
+                    new_user.email = register_form.cleaned_data['email']
+                    new_user.name = register_form.cleaned_data['name']
+                    new_user.password = password1
+                    new_user.save()
+                    # message = '????? ???????? ????? ??'
+                    message = '???? ?????? ??? ????? ?? ???? ???? ????.'
+                except Exception as e:
+                    return HttpResponse("user creation faild - " + str(e))
+    register_form = Register()
+    forgotPass_form = ForgotPass()
+    login_form = Login()
+    return render(request, "register.html",{'register_form': register_form,
+                                            'forgotPass_form': forgotPass_form,
+                                            'login_form': login_form})

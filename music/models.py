@@ -96,15 +96,15 @@ class Track(models.Model):
 
 class User(AbstractBaseUser):
     username = models.CharField(max_length=30, unique=Track, primary_key=True)
-    name = models.CharField(max_length=30, blank=True)
-    email = models.EmailField()
+    name = models.CharField(max_length=30)
+    email = models.EmailField(unique=True)
     phone = models.CharField(max_length=10, blank=True)
     address = models.TextField(blank=True)
     balance = models.IntegerField(default=0)
     isGold = models.BooleanField(default=False)
     isActive = models.BooleanField(default=False)
     profileImg = models.ImageField(upload_to="user/profileimg", default="user/profileimg/default.jpg")
-    lastLogin = models.DateTimeField(blank=True)
+    lastLogin = models.DateTimeField(blank=True,null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
     USERNAME_FIELD = 'username'
