@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    تونز -
+    ثبت نام
+{% endblock %}
+{% block section %}
+    <section class="row">
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <ul>
+                    <li>username : {{ register_form.username }}</li>
+                    <li>email : {{ register_form.email }}</li>
+                    <li>name : {{ register_form.name }}</li>
+                    <li>password : {{ register_form.password }}</li>
+                    <li>repeat password : {{ register_form.password2 }}</li>
+                    <li>security code : {{ register_form.captcha }}</li>
+                    <li><input type="submit"></li>
+                    <li>
+                        {% for field in register_form %}
+                            {{ field.errors }}{% if field.errors %}<br>{% endif %}
+                        {% endfor %}
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <hr>
+        <div class="clear"></div>
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ forgotPass_form.as_p }}
+                <li><input type="submit"></li>
+            </form>
+        </div>
+        <hr>
+        <div class="clear"></div>
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ login_form.as_p }}
+                <li><input type="submit"></li>
+            </form>
+        </div>
+        <div class="clear"></div>
+    </section>
+{% endblock %}
