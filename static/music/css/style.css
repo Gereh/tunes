@@ -541,3 +541,17 @@ button#next , button#prev , button#next1 , button#prev1 , button#next2 , button#
 {
 	list-style-type: none !important;
 }
+#login-form{
+	position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 10px;
+    margin: 10px 0 0;
+    list-style: none;
+    text-align: right;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+}

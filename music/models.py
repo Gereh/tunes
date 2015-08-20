@@ -95,7 +95,7 @@ class Track(models.Model):
 
 
 class User(AbstractBaseUser):
-    userName = models.CharField(max_length=30, unique=Track, primary_key=True)
+    username = models.CharField(max_length=30, unique=Track, primary_key=True)
     name = models.CharField(max_length=30, blank=True)
     email = models.EmailField()
     phone = models.CharField(max_length=10, blank=True)
@@ -103,20 +103,21 @@ class User(AbstractBaseUser):
     balance = models.IntegerField(default=0)
     isGold = models.BooleanField(default=False)
     isActive = models.BooleanField(default=False)
+    profileImg = models.ImageField(upload_to="user/profileimg", default="user/profileimg/default.jpg")
     lastLogin = models.DateTimeField(blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
-    USERNAME_FIELD = 'userName'
-    REQUIRED_FIELDS = ["userName", "email"]
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ["username", "email"]
 
     def __unicode__(self):
-        return u'%s' % self.userName
+        return u'%s' % self.username
 
     def get_full_name(self):
         return self.name
 
     def get_short_name(self):
-        return self.userName
+        return self.username
 
     def save(self, *args, **kwargs):
         self.password = make_password(self.password)

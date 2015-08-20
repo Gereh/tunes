@@ -28,4 +28,10 @@ urlpatterns = [
     url(r'^music/', include('music.urls')),
     # media
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    # captcha
+    url(r'^captcha/', include('captcha.urls')),
+    # login
+    url(r'^login/$', views.login, name='login'),
+    # logout
+    url(r'^logout/$', views.logout, name='logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
