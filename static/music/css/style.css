@@ -547,11 +547,97 @@ button#next , button#prev , button#next1 , button#prev1 , button#next2 , button#
     left: 0;
     z-index: 1000;
     float: left;
-    min-width: 160px;
+    min-width: 270px;
     padding: 5px 10px;
-    margin: 10px 0 0;
+    margin: 13px 0 0;
     list-style: none;
     text-align: right;
     background-color: rgba(0, 0, 0, 0.85);
     display: none;
+}
+#login-form ul li
+{
+	list-style-type: none;
+}
+ul.login-header
+{
+	margin-bottom: 8px;
+}
+.login-header li
+{
+	display: inline-table;
+}
+li.login-txt , li.forget-pass a , .error-txt
+{
+	font-size: 13px;
+	color: #fff;
+	text-decoration: none;
+}
+input#id_username , input#id_password
+{
+	background-color: rgba(76, 71, 63, 0.85);
+    border: none;
+    min-height: 30px;
+    width: 100%;
+    margin-bottom: 8px;
+	outline: none;
+	padding: 0px 5px;
+	color:#fff;
+}
+.captcha img
+{
+	float: left;
+	height: 30px;
+}
+.captcha input#id_captcha_1
+{
+
+	background-color: rgba(76, 71, 63, 0.85);
+    border: none;
+    min-height: 30px;
+    margin-bottom: 8px;
+	outline: none;
+	padding: 0px 5px;
+	color:#fff;
+}
+ul.login-forget
+{
+	float: left;
+}
+.login-forget li
+{
+	display: inline-table;
+	padding-right: 7px;
+}
+.login-forget input[type="submit"]
+{
+	background-color: #e23646;
+	color: #fff;
+	border: none;
+	height: 30px;
+	padding: 0px 10px;
+}
+ul.error
+{
+	margin: 8px 0px;
+}
+.error li
+{
+	display: inline-table;
+}
+.error li span.fa
+{
+	background-color: #c80202;
+    padding: 5px 6px;
+    color: #fff;
+}
+.register-btn a
+{
+	background-color: #0393a4;
+    display: block;
+    padding: 7px;
+    text-align: center;
+    color: #fff;
+    margin: 15px 0px;
+	text-decoration: none;
 }
