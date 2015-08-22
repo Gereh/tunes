@@ -5,7 +5,7 @@ from .forms import Login, ForgotPass, Register
 from django.contrib.auth.hashers import check_password
 
 
-def home(request):
+def home(request, authenticated=False):
     slider = Album.objects.all().order_by('publishDate')[:5]
     most_visited = Album.objects.all().order_by('visits')[:12]
     most_downloaded = Album.objects.all().order_by('downloads')[:12]
@@ -27,7 +27,8 @@ def home(request):
                                          'most_downloaded': most_downloaded,
                                          'advertises': advertises,
                                          'form': form,
-                                         'user': user})
+                                         'user': user,
+                                         'authenticated': authenticated})
 
 
 def album(requset, album_slug):
@@ -75,6 +76,8 @@ def login(request):
             else:
                 return HttpResponse("faild pass")
             return HttpResponseRedirect("/")
+        else:
+            return HttpResponseRedirect("form is invalid")
     else:
         return HttpResponseRedirect("/")
 
