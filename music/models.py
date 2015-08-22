@@ -95,7 +95,7 @@ class Track(models.Model):
 
 
 class User(AbstractBaseUser):
-    username = models.CharField(max_length=30, unique=Track, primary_key=True)
+    username = models.CharField(max_length=30, unique=True, primary_key=True)
     name = models.CharField(max_length=30)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=10, blank=True)

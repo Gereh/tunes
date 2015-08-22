@@ -99,13 +99,18 @@ def register(request):
                     new_user.name = register_form.cleaned_data['name']
                     new_user.password = password1
                     new_user.save()
+                    HttpResponseRedirect('/')  # need attention
                     # message = '????? ???????? ????? ??'
                     message = '???? ?????? ??? ????? ?? ???? ???? ????.'
                 except Exception as e:
                     return HttpResponse("user creation faild - " + str(e))
-    register_form = Register()
-    forgotPass_form = ForgotPass()
-    login_form = Login()
-    return render(request, "register.html",{'register_form': register_form,
-                                            'forgotPass_form': forgotPass_form,
-                                            'login_form': login_form})
+        else:
+            login_form = Login()  # need attention
+            forgotPass_form = ForgotPass()  # need atention
+    else:
+        register_form = Register()
+        forgotPass_form = ForgotPass()
+        login_form = Login()
+    return render(request, "register.html", {'register_form': register_form,
+                                             'forgotPass_form': forgotPass_form,
+                                             'login_form': login_form})
