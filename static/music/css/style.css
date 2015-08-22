@@ -555,7 +555,7 @@ button#next , button#prev , button#next1 , button#prev1 , button#next2 , button#
     background-color: rgba(0, 0, 0, 0.85);
     display: none;
 }
-#login-form ul li
+#login-form ul li , .logined ul li
 {
 	list-style-type: none;
 }
@@ -599,6 +599,7 @@ input#id_username , input#id_password
 	outline: none;
 	padding: 0px 5px;
 	color:#fff;
+	max-width: 160px;
 }
 ul.login-forget
 {
@@ -630,6 +631,7 @@ ul.error
 	background-color: #c80202;
     padding: 5px 6px;
     color: #fff;
+	margin-right: 5px;
 }
 .register-btn a
 {
@@ -639,5 +641,28 @@ ul.error
     text-align: center;
     color: #fff;
     margin: 15px 0px;
+	text-decoration: none;
+}
+.exit-panel
+{
+	float: left;
+	margin-bottom: 15px;
+}
+.exit-panel li
+{
+	display: inline-table;
+}
+.exit a
+{
+	background-color: #c80202;
+	color: #fff;
+	padding: 5px 7px;
+	text-decoration: none;
+}
+.user-panel a
+{
+	background-color: #0393a4;
+	color: #fff;
+	padding: 5px 7px;
 	text-decoration: none;
 }
