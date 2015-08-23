@@ -41,6 +41,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12 cover-bg" style="background: url('{% static 'music/img/up.jpg'%}') no-repeat top center; background-size: 100% 500px; padding:150px 0px 100px 0px; min-height: 500px;">
 				<div class="col-md-12 col-sm-12 col-xs-12 artistName">
 					<div class="atriststyle">
+<<<<<<< HEAD
 						<h4 style="font-size: 23px;">سعید انصاری</h4>
 						<p>صفحه کاربری</p>
 					</div>
@@ -91,16 +92,55 @@
                                   </div>
                                     <div class="clear"></div>
                                 </div>
+=======
+						<h4 style="font-size: 23px;">{{ artist.name }}</h4>
+						<p>{{ artist.title }}</p>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding height300">
+							<div class="title">
+								<p class="pull-right">
+									<span class="fa fa-bars"></span>گالری
+								</p>
+								<ul class="pull-left ZDmneu">
+									<li><a href=""><img src="{% static 'music/img/zoom.png'%}" alt=""></a></li>
+								</ul>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body">
+								<div class="carousel slide media-carousel" id="media1">
+							        <div class="carousel-inner">
+                                        {% for poster in posters %}
+                                          <div class="item  {% ifequal forloop.first True %}active{% endifequal %}">
+                                            <div class="row">
+                                              <div class="col-md-12">
+                                                <a href="#"><img class="img-responsive" alt="" src="{{ poster.img.url }}"></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        {% endfor %}
+							        </div>
+							        <a data-slide="prev" href="#media1" class="left carousel-control"><img src="{% static 'music/img/sliderPrev.png'%}" alt=""></a>
+							        <a data-slide="next" href="#media1" class="right carousel-control"><img src="{% static 'music/img/sliderNext.png'%}" alt=""></a>
+							    </div>   
+>>>>>>> origin/master
 							</div>
 						</div>
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding height200">
 							<div class="title">
 								<p class="pull-right">
+<<<<<<< HEAD
 									<span class="fa fa-bars"></span>حساب
+=======
+									<span class="fa fa-bars"></span>امکانات مرتبط
+>>>>>>> origin/master
 								</p>
 								<div class="clear"></div>
 							</div>
 							<div class="box-body">
+<<<<<<< HEAD
 								<p class="text-center premium"><a href="">تبدیل به کاربر طلایی</a></p>
 								<br>
 
@@ -129,18 +169,52 @@
                                         <li style="list-style-type: none;" class="buy-btn"><input type="submit" value="خرید"/></li>
                                     </form>
 
+=======
+								<ul class="text-center artistsocial">
+									<li><a href="{{ artist.twitter }}"><img src="{% static 'music/img/social (1).png'%}" alt=""></a></li>
+									<li><a href="{{ artist.rss }}"><img src="{% static 'music/img/social (2).png'%}" alt=""></a></li>
+									<li><a href="{{ artist.facebook }}"><img src="{% static 'music/img/social (3).png'%}" alt=""></a></li>
+									<li><a href="{{ artist.youtube }}"><img src="{% static 'music/img/social (4).png'%}" alt=""></a></li>
+								</ul>
+								<br>
+
+								<ul class="publisher">
+							    	<li><a href="{{ artist.website }}">وب سایت شخصی</a></li>
+							    	<li><a href="{{ artist.weblog }}">وبلاگ شخصی</a></li>
+>>>>>>> origin/master
 							    </ul>
 							</div>
 						</div>
 					</div>
+<<<<<<< HEAD
 					<div class="col-md-7 col-sm-7 col-xs-12" style="padding-left:0px;">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding padding-bottom height300">
 							<div class="title">
 								<p class="pull-right">
+=======
+					<div class="col-md-8 col-sm-8 col-xs-12" style="padding-left:0px;">
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding padding-bottom height300">
+							<div class="title">
+								<p class="pull-right">
+									<span class="fa fa-bars"></span>بیوگرافی
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body scrollbar" style="max-height:245px; overflow: auto;">
+								<p class="description">
+									{{ artist.bio }}
+								</p>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding padding-bottom height200">
+							<div class="title">
+								<p class="pull-right">
+>>>>>>> origin/master
 									<span class="fa fa-bars"></span>آخرین اخبار
 								</p>
 								<div class="clear"></div>
 							</div>
+<<<<<<< HEAD
 							<div class="box-body scrollbar" style="max-height:500px; overflow: auto; min-height: 500px;">
 								<ul class="publisher">
 									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
@@ -167,6 +241,13 @@
 									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
 									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
 									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+=======
+							<div class="box-body scrollbar" style="max-height:245px; overflow: auto;">
+								<ul class="publisher">
+                                    {% for post in posts %}
+                                        <li><a href="post/{{ post.id }}/">{{ post.title }}</a></li>
+									{% endfor %}
+>>>>>>> origin/master
 								</ul>
 							</div>
 						</div>
@@ -175,6 +256,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
 							<div class="title">
 								<p class="pull-right">
+<<<<<<< HEAD
 									<span class="fa fa-bars"></span>آثار خریداری شده
 								</p>
 								<div class="pull-left">
@@ -344,6 +426,31 @@
 							</div>
 							<div class="box-body">
 
+=======
+									<span class="fa fa-bars"></span>آثار
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body">
+                                {% for album in albums %}
+								    <div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>{{ album.name }}</h4>
+						                    <p>{% for artist in album.artistID.all %}{{ artist.name }}{% endfor %}</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href="javascript:;" id="playlist-add-{{ album.id }}"><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href="javascript:;" id="playlist-play-{{ album.id }}"><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{{ album.thumbImg.url }}">
+						            </div>
+					            </div> 
+                                {% endfor %}
+>>>>>>> origin/master
 							</div>
 						</div>
 					</div>
