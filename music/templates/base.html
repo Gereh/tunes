@@ -342,14 +342,14 @@
                                                     </ul>
                                                     <div class="clear"></div>
                                                 </li>
-                                                <li>
-
+                                                {% ifequal print_incorrect_pass True %}
+                                                    <li>
                                                         <ul class="error">
                                                             <li><span class="fa fa-times"></span></li>
                                                             <li class="error-txt">رمز عبور یا نام کاربری اشتباه است.</li>
                                                         </ul>
-
-                                                </li>
+                                                    </li>
+                                                {% endifequal %}
                                                 <li class="register-btn"><a href="">ثبت نام</a></li>
                                             </ul>
                                         </form>
@@ -361,8 +361,15 @@
                                                     <li id="close-login" class="pull-left"><img src="{% static 'music/img/remove.png' %}"></li>
                                                     <div class="clear"></div>
                                                 </ul>
-                                                <li class="error-txt">موجودی : 5000</li>
-                                                <li class="error-txt">کاربر معمولی</li>
+
+                                                <li class="error-txt">موجودی :
+                                                {{ user.balance }}
+                                                </li>
+                                                {% ifequal user.isGold True %}
+                                                    <li class="error-txt">کاربر ویژه</li>
+                                                {% else %}
+                                                    <li class="error-txt">کاربر معمولی</li>
+                                                {% endifequal %}
                                                 <li>
 
                                                         <ul class="exit-panel">
