@@ -17,7 +17,8 @@ from django.forms.util import ErrorList
 # return : a dic that indicate result
 def user_auth(request):
     res = {}
-    # checking that user logined or no
+
+    # checking that user logged in or no
     if 'username' not in request.session:
         form = Login()
         username = None
@@ -148,7 +149,9 @@ def post(request, artist_slug, post_id):
 
 # Responsible for handling "/login/" url
 def login(request):
+    # checking that user sended any thing in headers of request or no
     if request.method == "POST":
+        # creating 
         form = Login(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -170,6 +173,7 @@ def login(request):
             res = HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
             res.set_cookie('incorrect_pass', 1)
             return res
+    # mean that user do not iput any thing
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
