@@ -1,8 +1,12 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from .models import *
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from .forms import Login, ForgotPass, Register
 from django.contrib.auth.hashers import check_password
+from django.forms.util import ErrorList
 
 
 def home(request, authenticated=False):
@@ -88,7 +92,6 @@ def logout(requset):
 
 
 def register(request):
-    message = ''
     if request.method == 'POST':
         register_form = Register(request.POST)
         if register_form.is_valid():
@@ -107,6 +110,8 @@ def register(request):
                     message = '???? ?????? ??? ????? ?? ???? ???? ????.'
                 except Exception as e:
                     return HttpResponse("user creation faild - " + str(e))
+            else:
+                pass
         else:
             login_form = Login()  # need attention
             forgotPass_form = ForgotPass()  # need atention
@@ -117,3 +122,7 @@ def register(request):
     return render(request, "register.html", {'register_form': register_form,
                                              'forgotPass_form': forgotPass_form,
                                              'login_form': login_form})
+
+
+def profile(request):
+    render(request, "profile.html")

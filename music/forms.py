@@ -19,11 +19,19 @@ class Login(forms.Form):
 
 class Register(ModelForm):
     password2 = forms.CharField(max_length=25)
-    captcha = CaptchaField()
-
+    captcha = CaptchaField(error_messages={'invalid':'کد امنیتی اشتباه می باشد'})
+    password2.widget.attrs['required']= 'required'
+    captcha.widget.attrs['required']='کد امنیتی را وارد کنید'
     class Meta:
         model = User
         fields = ['username', 'email', 'name', 'password']
+        error_messages = {
+            'username': {'required':'نام کاربری را وارد کنید'},
+            'email': {'required':'ایمیل را وارد کنید'
+                     ,'invalid':'ایمیل صحیح نمی باشد'},
+            'name': {'required': 'نامتان را وارد کنید'},
+            'password': {'required': 'پسورد را وارد کنید'}
+        }
 
 
 class ForgotPass(forms.Form):
