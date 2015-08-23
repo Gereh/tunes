@@ -5,44 +5,168 @@
     ثبت نام
 {% endblock %}
 {% block section %}
-    <section class="row">
-        <div>
-            <form action="" method="post">
-                {% csrf_token %}
-                <ul>
-                    <li>username : {{ register_form.username }}{{ register_form.username.error }}</li>
-                    <li>email : {{ register_form.email }}{{ register_form.email.error }}</li>
-                    <li>name : {{ register_form.name }}</li>
-                    <li>password : {{ register_form.password }}</li>
-                    <li>repeat password : {{ register_form.password2 }}</li>
-                    <li>security code : {{ register_form.captcha }}</li>
-                    <li><input type="submit"></li>
-                    <li>
-                        {% for field in register_form %}
-                            {{ field.errors }}{% if field.errors %}<br>{% endif %}
-                        {% endfor %}
-                    </li>
-                </ul>
-            </form>
+    <section class="row" style="min-height: 750px;">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 65px;">
+            <div class="container">
+                <div class="col-md-7 col-md-push-5 col-sm-7 col-sm-push-5 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="title">
+                            <p class="pull-right">
+                                <span class="fa fa-bars"></span>ثبت نام
+                            </p>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="box-body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <ul class="register-form">
+                                    <li>
+                                        <ul class="display-inline">
+                                            <li>نام کاربری :</li>
+                                            <li style="width: 200px;">{{ register_form.username }}</li>
+                                            <li>{{ register_form.username.errors }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="display-inline">
+                                            <li>ایمیل : </li>
+                                            <li style="width: 230px;">{{ register_form.email }}</li>
+                                            <li>{{ register_form.email.errors }}</li>
+                                        </ul>
+                                    </li>
+                                     <li>
+                                        <ul class="display-inline">
+                                            <li>نام و نام خانوادگی : </li>
+                                            <li style="width: 157px;">{{ register_form.name }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="display-inline">
+                                            <li>رمز عبور</li>
+                                            <li style="width: 220px;">{{ register_form.password }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="display-inline">
+                                            <li>تاییدیه رمز عبور : </li>
+                                            <li style="width: 170px;">{{ register_form.password2 }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="display-inline">
+                                            <li>کد امنیتی : </li>
+                                            <li>{{ register_form.captcha }}</li>
+                                            <div class="clear"></div>
+                                        </ul>
+                                    </li>
+                                    <li style="list-style-image: none;list-style-type: none;width: 292px; ">
+                                        <input type="submit" value="ثبت نام">
+                                    </li>
+                                    <li style="list-style-image: none;list-style-type: none; ">
+                                        {% for field in register_form %}
+                                            {{ field.errors }}{% if field.errors %}<br>{% endif %}
+                                        {% endfor %}
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-md-pull-7 col-sm-5 col-sm-pull-7 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="title">
+                            <p class="pull-right">
+                                <span class="fa fa-bars"></span>ورود
+                            </p>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="box-body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <ul class="register-form">
+                                    <li>
+                                        <ul class="display-inline">
+                                            <li >نام کاربری :</li>
+                                            <li style="width: 74%;">{{ login_form.username }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="display-inline">
+                                            <li>رمز عبور :</li>
+                                            <li style="width: 77%;">{{ login_form.password }}</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="display-inline">
+                                            <li>کد امنیتی : </li>
+                                            <li class="login-captcha">{{ login_form.captcha }}</li>
+                                            <div class="clear"></div>
+                                        </ul>
+                                    </li>
+                                    <li style="list-style-image: none;list-style-type: none; ">
+                                        <ul class="error-ul">
+                                            <li class="pull-right">
+                                                <ul class="error">
+                                                    <li><span class="fa fa-times"></span></li>
+                                                    <li class="error-txt">رمز عبور یا نام کاربری اشتباه است.</li>
+                                                </ul>
+                                             </li>
+                                             <li class="pull-left">
+                                                <input type="submit" value="ورود">
+                                             </li>
+                                            <div class="clear"></div>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="title">
+                            <p class="pull-right">
+                                <span class="fa fa-bars"></span>فراموشی کلمه عبور
+                            </p>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="box-body">
+                             <form action="" method="post">
+                                 {% csrf_token %}
+                                 <p style="color: #333;">در صورت فراموشی کلمه عبور ایمیل خود را وارد نمایید</p>
+                                 <br>
+                                 <ul class="register-form">
+                                     <li>
+                                        <ul class="display-inline">
+                                            <li>ایمیل : </li>
+                                            <li style="width: 82%;">{{ forgotPass_form.email }}</li>
+                                        </ul>
+                                     </li>
+                                     <li>
+                                        <ul class="display-inline">
+                                            <li>کد امنیتی : </li>
+                                            <li class="login-captcha">{{ login_form.captcha }}</li>
+                                            <div class="clear"></div>
+                                        </ul>
+                                    </li>
+                                     <li style="list-style-image: none;list-style-type: none; ">
+                                        <ul class="error-ul">
+                                            <li class="pull-right">
+                                                <ul class="error">
+                                                    <li><span style="background-color: #3e8f02" class="fa fa-check"></span></li>
+                                                    <li style="color: #3e8f02" class="error-txt">ایمیل ارسال شد !</li>
+                                                </ul>
+                                             </li>
+                                             <li class="pull-left">
+                                                <input type="submit" value="ارسال">
+                                             </li>
+                                            <div class="clear"></div>
+                                        </ul>
+                                    </li>
+                                 </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <hr>
-        <div class="clear"></div>
-        <div>
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ forgotPass_form.as_p }}
-                <li><input type="submit"></li>
-            </form>
-        </div>
-        <hr>
-        <div class="clear"></div>
-        <div>
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ login_form.as_p }}
-                <li><input type="submit"></li>
-            </form>
-        </div>
-        <div class="clear"></div>
     </section>
 {% endblock %}
