@@ -216,4 +216,4 @@ def register(request):
 
 
 def profile(request):
-    render(request, "profile.html")
+    return render(request, "profile.html")
