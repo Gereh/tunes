@@ -1,0 +1,353 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    تونز -
+    {{ artist.name }}
+{% endblock %}
+{% block playlist %}
+    // add tracks
+    {% for album in albums %}
+        id = "#playlist-add-{{ album.id }}"
+        $(id).click(function() {
+        myPlaylist.add({
+            title:"{{ album.name }}",
+            artist:"{% for artist in album.artistID.all %}{{ artist.name }}{% endfor %}",
+            free:false,
+            mp3:"{{ album.mainTrack.link.url }}",
+            poster: "{{ album.thumbImg.url }}"
+        });
+        myPlaylist.next();
+        myPlaylist.pause();
+        });
+    {% endfor %}
+
+    // play tracks
+    {% for album in albums %}
+        id = "#playlist-play-{{ album.id }}"
+        $(id).click(function() {
+        myPlaylist.add({
+            title:"{{ album.name }}",
+            artist:"{% for artist in album.artistID.all %}{{ artist.name }}{% endfor %}",
+            free:false,
+            mp3:"{{ album.mainTrack.link.url }}",
+            poster: "{{ album.mainTrack.playerImg.url }}"
+        });
+        myPlaylist.next();
+        });
+    {% endfor %}
+{% endblock %}
+{% block section %}
+<section class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12 cover-bg" style="background: url('{% static 'music/img/up.jpg'%}') no-repeat top center; background-size: 100% 500px; padding:150px 0px 100px 0px; min-height: 500px;">
+				<div class="col-md-12 col-sm-12 col-xs-12 artistName">
+					<div class="atriststyle">
+						<h4 style="font-size: 23px;">سعید انصاری</h4>
+						<p>صفحه کاربری</p>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-md-5 col-sm-5 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding height200">
+							<div class="title">
+								<p class="pull-right">
+									<span class="fa fa-bars"></span>دنبال شده ها
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body following scrollbar" style="max-height:200px; overflow: auto; min-height: 200px;">
+                                <div class="media">
+                                  <a class="pull-right" href="#">
+                                    <img class="media-object" src="{% static 'music/img/follow.png'%}" alt="">
+                                  </a>
+                                  <div class="media-body">
+                                      <img class="pull-left" src="{% static 'music/img/remove - black.png'%}" alt="">
+                                      <h4 class="media-heading">محسن چاوشی</h4>
+                                      <p>خواننده و آهنگساز</p>
+
+                                  </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="media">
+                                  <a class="pull-right" href="#">
+                                    <img class="media-object" src="{% static 'music/img/follow.png'%}" alt="">
+                                  </a>
+                                  <div class="media-body">
+                                      <img class="pull-left" src="{% static 'music/img/remove - black.png'%}" alt="">
+                                      <h4 class="media-heading">محسن چاوشی</h4>
+                                      <p>خواننده و آهنگساز</p>
+
+                                  </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="media">
+                                  <a class="pull-right" href="#">
+                                    <img class="media-object" src="{% static 'music/img/follow.png'%}" alt="">
+                                  </a>
+                                  <div class="media-body">
+                                      <img class="pull-left" src="{% static 'music/img/remove - black.png'%}" alt="">
+                                      <h4 class="media-heading">محسن چاوشی</h4>
+                                      <p>خواننده و آهنگساز</p>
+
+                                  </div>
+                                    <div class="clear"></div>
+                                </div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding height200">
+							<div class="title">
+								<p class="pull-right">
+									<span class="fa fa-bars"></span>حساب
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body">
+								<p class="text-center premium"><a href="">تبدیل به کاربر طلایی</a></p>
+								<br>
+
+								<ul class="publisher">
+							    	<li><a href="{{ artist.website }}">موجودی حساب : 30000 تومان</a></li>
+							    	<li><a href="{{ artist.weblog }}">افزایش حساب : </a></li>
+                                    <form action="">
+                                         <li style="list-style-type: none;">
+                                            <select style="width: 100%; outline: none; padding: 5px;">
+                                              <option>مبلغ</option>
+                                              <option>2</option>
+                                              <option>3</option>
+                                              <option>4</option>
+                                              <option>5</option>
+                                            </select>
+                                        </li>
+                                        <li style="list-style-type: none;">
+                                            <select style="width: 100%; outline: none; padding: 5px;">
+                                              <option>پذیرنده</option>
+                                              <option>2</option>
+                                              <option>3</option>
+                                              <option>4</option>
+                                              <option>5</option>
+                                            </select>
+                                        </li>
+                                        <li style="list-style-type: none;" class="buy-btn"><input type="submit" value="خرید"/></li>
+                                    </form>
+
+							    </ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-7 col-sm-7 col-xs-12" style="padding-left:0px;">
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding padding-bottom height300">
+							<div class="title">
+								<p class="pull-right">
+									<span class="fa fa-bars"></span>آخرین اخبار
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body scrollbar" style="max-height:500px; overflow: auto; min-height: 500px;">
+								<ul class="publisher">
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+                                    <li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+                                    <li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+                                    <li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+									<li><a href="">تیتر خبر شماره یک تیتر خبر شماره یک تیتر خبر شماره یک </a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+							<div class="title">
+								<p class="pull-right">
+									<span class="fa fa-bars"></span>آثار خریداری شده
+								</p>
+								<div class="pull-left">
+									<button type="button" id="next2"><span class="fa fa-chevron-right"></span></button>
+									<select class="selector" id="mycars2">
+									   <option value="volvo">Volvo</option>
+									   <option value="saab">Saab</option>
+									   <option value="mercedes">Mercedes</option>
+									   <option value="audi">Audi</option>
+									</select>
+									<button type="button" id="prev2"><span class="fa fa-chevron-left"></span></button>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body">
+								<div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>من خود آن سیزدهم</h4>
+						                    <p>محسن چاوشی</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						            </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>من خود آن سیزدهم</h4>
+						                    <p>محسن چاوشی</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						            </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>من خود آن سیزدهم</h4>
+						                    <p>محسن چاوشی</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						            </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>من خود آن سیزدهم</h4>
+						                    <p>محسن چاوشی</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						            </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>من خود آن سیزدهم</h4>
+						                    <p>محسن چاوشی</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						            </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>من خود آن سیزدهم</h4>
+						                    <p>محسن چاوشی</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						            </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>من خود آن سیزدهم</h4>
+						                    <p>محسن چاوشی</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						            </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="thumbnail">
+						                <div class="caption">
+						                	<br>
+						                    <h4>من خود آن سیزدهم</h4>
+						                    <p>محسن چاوشی</p>
+						                    <br>
+						                    <ul class="ZDmneu">
+												<li><a href=""><img src="{% static 'music/img/add.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/playSmall.png'%}" alt=""></a></li>
+												<li><a href=""><img src="{% static 'music/img/downloadWhite.png'%}" alt=""></a></li>
+											</ul>
+						                </div>
+						                <img class="img-responsive" alt="" src="{% static 'music/img/slider.png'%}">
+						            </div>
+					            </div>
+							</div>
+						</div>
+					</div>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding height200">
+							<div class="title">
+								<p class="pull-right">
+									<span class="fa fa-bars"></span>دنبال شده ها
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body">
+
+							</div>
+						</div>
+					</div>
+					<div class="col-md-7 col-sm-7 col-xs-12" style="padding-left:0px;">
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding padding-bottom height300">
+							<div class="title">
+								<p class="pull-right">
+									<span class="fa fa-bars"></span>ویرایش اطلاعات
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div class="box-body">
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+{% endblock %}
