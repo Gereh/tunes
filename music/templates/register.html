@@ -10,8 +10,8 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <ul>
-                    <li>username : {{ register_form.username }}</li>
-                    <li>email : {{ register_form.email }}</li>
+                    <li>username : {{ register_form.username }}{{ register_form.username.error }}</li>
+                    <li>email : {{ register_form.email }}{{ register_form.email.error }}</li>
                     <li>name : {{ register_form.name }}</li>
                     <li>password : {{ register_form.password }}</li>
                     <li>repeat password : {{ register_form.password2 }}</li>

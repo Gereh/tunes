@@ -342,20 +342,39 @@
                                                     </ul>
                                                     <div class="clear"></div>
                                                 </li>
-                                                {% if not authenticated %}
-                                                    <li>
+                                                <li>
+
                                                         <ul class="error">
                                                             <li><span class="fa fa-times"></span></li>
                                                             <li class="error-txt">رمز عبور یا نام کاربری اشتباه است.</li>
                                                         </ul>
-                                                    </li>
-                                                {% endif %}
+
+                                                </li>
                                                 <li class="register-btn"><a href="">ثبت نام</a></li>
                                             </ul>
                                         </form>
                                     {% else %}
-                                        salam {{ user.name }}
-                                        <a href="/logout/" type="submit">logout</a>
+                                        <div class="logined">
+                                            <ul>
+                                                <ul class="login-header">
+                                                    <li style="font-size: 16px" class="login-txt">{{ user.name }}</li>
+                                                    <li id="close-login" class="pull-left"><img src="{% static 'music/img/remove.png' %}"></li>
+                                                    <div class="clear"></div>
+                                                </ul>
+                                                <li class="error-txt">موجودی : 5000</li>
+                                                <li class="error-txt">کاربر معمولی</li>
+                                                <li>
+
+                                                        <ul class="exit-panel">
+                                                            <li class="user-panel"><a href="">پنل کاربری</a></li>
+                                                            <li class="exit"><a href="/logout/" type="submit">خروج</a></li>
+                                                        </ul>
+                                                    <div class="clear"></div>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+
                                     {% endif %}
                                 </div>
 						  	</div>
