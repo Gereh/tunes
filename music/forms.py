@@ -8,8 +8,8 @@ from .models import User
 
 
 class Login(forms.Form):
-    username = forms.CharField(label="username", max_length=20)
-    password = forms.CharField(label="password", max_length=20, widget=forms.PasswordInput)
+    username = forms.CharField(label="username", min_length=4,max_length=30)
+    password = forms.CharField(label="password", min_length=6,max_length=30, widget=forms.PasswordInput)
     captcha = CaptchaField()
 
     username.widget.attrs['required']= 'required'
@@ -24,7 +24,7 @@ class Login(forms.Form):
 
 
 class Register(ModelForm):
-    password2 = forms.CharField(max_length=25)
+    password2 = forms.CharField(min_length=6,max_length=30)
     captcha = CaptchaField(error_messages={'invalid':'کد امنیتی اشتباه می باشد'})
 
     password2.widget.attrs['required']= 'required'
@@ -37,10 +37,10 @@ class Register(ModelForm):
         model = User
         fields = ['username', 'email', 'name', 'password']
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'نام کاربری'}),
-            'email': forms.TextInput(attrs={'placeholder': 'ایمیل'}),
-            'name': forms.TextInput(attrs={'placeholder': 'نام و نام خانوادگی'}),
-            'password': forms.TextInput(attrs={'placeholder': 'رمز عبور'})
+            'username': forms.TextInput(attrs={'placeholder': 'نام کاربری','required':'required'}),
+            'email': forms.TextInput(attrs={'placeholder': 'ایمیل','required':'required'}),
+            'name': forms.TextInput(attrs={'placeholder': 'نام و نام خانوادگی','required':'required'}),
+            'password': forms.TextInput(attrs={'placeholder': 'رمز عبور','required':'required'})
         }
         error_messages = {
             'email': {'invalid':'ایمیل صحیح نمی باشد'}
