@@ -5,7 +5,7 @@ from .forms import Login, ForgotPass, Register
 from django.contrib.auth.hashers import check_password
 
 
-def home(request, authenticated=False):
+def home(request):
     slider = Album.objects.all().order_by('publishDate')[:5]
     most_visited = Album.objects.all().order_by('visits')[:12]
     most_downloaded = Album.objects.all().order_by('downloads')[:12]
@@ -22,13 +22,16 @@ def home(request, authenticated=False):
             del request.session['username']
             user = None
         form = None
+
+    # checking that user enter wrong pass in login form or no
+
     return render(request, 'home.html', {'slider': slider,
                                          'most_visited': most_visited,
                                          'most_downloaded': most_downloaded,
                                          'advertises': advertises,
                                          'form': form,
                                          'user': user,
-                                         'authenticated': authenticated})
+                                         'authenticated': False })
 
 
 def album(requset, album_slug):
@@ -70,16 +73,31 @@ def login(request):
             try:
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
-                return HttpResponse("faild user")
+                # flaging that user login form is incorrect in header of response
+                response = HttpResponseRedirect("/")
+                response['login_faild'] = 1
+                return response
             if check_password(password, user.password):
                 request.session['username'] = username
             else:
-                return HttpResponse("faild pass")
-            return HttpResponseRedirect("/")
+                # flaging that user login form is incorrect in header of response
+                response = HttpResponseRedirect("/")
+                response['login_faild'] = 1
+                return response
+            # flaging that user login form is correct in header of response
+            response = HttpResponseRedirect("/")
+            response['login_faild'] = 0
+            return response
         else:
-            return HttpResponseRedirect("form is invalid")
+            # flaging that user login form is incorrect in header of response
+            response = HttpResponseRedirect("/")
+            response['login_faild'] = 1
+            return response
     else:
-        return HttpResponseRedirect("/")
+        # flaging that user login form is incorrect in header of response
+        response = HttpResponseRedirect("/")
+        response['login_faild'] = 1
+        return response
 
 
 def logout(requset):
